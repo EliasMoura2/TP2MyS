@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tp2mys;
+package logica;
 
 /**
  *
  * @author elias
  */
-public class TP2MyS {
+public class ControladoraLogica {
 
     /**
      * @param args the command line arguments
