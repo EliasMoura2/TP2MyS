@@ -1,5 +1,7 @@
 package Visual;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author elias
@@ -14,6 +16,11 @@ public class GCL extends javax.swing.JFrame {
     public GCL(ControladoraVisual miVisual) {
         initComponents();
         this.setTitle("Generador congruencial lineal");
+        lblTest.setVisible(false);
+        btnMonobit.setVisible(false);
+        btnPoker.setVisible(false);
+        btnRachas.setVisible(false);
+        btnRachasLargas.setVisible(false);
     }
 
 
@@ -202,7 +209,7 @@ public class GCL extends javax.swing.JFrame {
                     .addComponent(btnPoker)
                     .addComponent(btnMonobit)
                     .addComponent(lblTest))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -215,8 +222,8 @@ public class GCL extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -233,18 +240,52 @@ public class GCL extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGenerarMouseMoved
 
     private void btnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarActionPerformed
-        int semilla= Integer.parseInt(txtSemilla.getText());
-        int incremento= Integer.parseInt(txtIncremento.getText());
-        int multiplicador= Integer.parseInt(txtMultiplicador.getText());
-        int modulo= Integer.parseInt(txtModulo.getText());
         
-        
+        if (controlarCamposGCL()){
+            int semilla = Integer.parseInt(txtSemilla.getText());
+            int incremento = Integer.parseInt(txtIncremento.getText());
+            int multiplicador = Integer.parseInt(txtMultiplicador.getText());
+            int modulo = Integer.parseInt(txtModulo.getText());
+
+            lblTest.setVisible(true);
+            btnMonobit.setVisible(true);
+            btnPoker.setVisible(true);
+            btnRachas.setVisible(true);
+            btnRachasLargas.setVisible(true);
+        }
     }//GEN-LAST:event_btnGenerarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
 
+public boolean controlarCamposGCL(){
+        boolean flag = true;
+        if ("".equals(txtModulo.getText())) {
+            flag = false;
+            JOptionPane.showMessageDialog(null, "Ingrese el modulo");
+        } else {
+            if ("".equals(txtMultiplicador.getText())) {
+                flag = false;
+                JOptionPane.showMessageDialog(null, "Ingrese el multiplicador");
+            } else {
+                if ("".equals(txtIncremento.getText())) {
+                    flag = false;
+                    JOptionPane.showMessageDialog(null, "Ingrese el incremento");
+                } else {
+                    if ("".equals(txtSemilla.getText())) {
+                        flag = false;
+                        JOptionPane.showMessageDialog(null, "Ingrese la semilla");
+                    } 
+                }
+            }
+        }
+        return flag;
+    }    
+    
+    
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGenerar;
     private javax.swing.JButton btnMonobit;
