@@ -330,7 +330,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbIncrementosMouseMoved
 
     private void btnGCLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGCLActionPerformed
-        GCL nuevaGCL = new GCL(miVisual);//(miVisual, miEmpleado)
+
+        GCL nuevaGCL = new GCL(miVisual, Integer.parseInt(txtPeriodo.getText()),Integer.parseInt(txtModulo.getText()), (int) cmbIncrementos.getSelectedItem(), (int) cmbMultiplicadores.getSelectedItem(), (int) cmbSemillas.getSelectedItem());
         nuevaGCL.setLocation(250, 10);
         nuevaGCL.show();
     }//GEN-LAST:event_btnGCLActionPerformed

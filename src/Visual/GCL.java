@@ -13,14 +13,25 @@ public class GCL extends javax.swing.JFrame {
      */
     
     ControladoraVisual miVisual;
-    public GCL(ControladoraVisual miVisual) {
+    int miPeriodo;
+    int miModulo;
+    int miIncremento;
+    int miMultiplicador;
+    int miSemilla;
+    
+    public GCL(ControladoraVisual miVisual, int periodo, int modulo, int incremento, int multiplicador, int semilla) {
         initComponents();
         this.setTitle("Generador congruencial lineal");
-        lblTest.setVisible(false);
-        btnMonobit.setVisible(false);
-        btnPoker.setVisible(false);
-        btnRachas.setVisible(false);
-        btnRachasLargas.setVisible(false);
+        //lblTest.setVisible(false);
+        //btnMonobit.setVisible(false);
+        //btnPoker.setVisible(false);
+        //btnRachas.setVisible(false);
+        //btnRachasLargas.setVisible(false);
+        txtModulo.setText(String.valueOf(modulo));
+        txtIncremento.setText(String.valueOf(incremento));
+        txtMultiplicador.setText(String.valueOf(multiplicador));
+        txtSemilla.setText(String.valueOf(semilla));
+        //miPeriodo=periodo;
     }
 
 
@@ -120,19 +131,24 @@ public class GCL extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(37, 37, 37)
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtModulo))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3)
                                     .addComponent(jLabel4)
                                     .addComponent(jLabel5))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtIncremento, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
+                                    .addComponent(txtSemilla)
                                     .addComponent(txtMultiplicador)
-                                    .addComponent(txtModulo)
-                                    .addComponent(txtSemilla)))
-                            .addComponent(btnGenerar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtIncremento, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(btnGenerar, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -152,13 +168,13 @@ public class GCL extends javax.swing.JFrame {
                             .addComponent(txtModulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(txtMultiplicador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(19, 19, 19)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
                             .addComponent(txtIncremento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtMultiplicador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))
+                        .addGap(19, 19, 19)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
                             .addComponent(txtSemilla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -240,18 +256,17 @@ public class GCL extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGenerarMouseMoved
 
     private void btnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarActionPerformed
-        
+    
         if (controlarCamposGCL()){
+                //lblTest.setVisible(true);
+                //btnMonobit.setVisible(true);
+                //btnPoker.setVisible(true);
+                //btnRachas.setVisible(true);
+                //btnRachasLargas.setVisible(true);
             int semilla = Integer.parseInt(txtSemilla.getText());
             int incremento = Integer.parseInt(txtIncremento.getText());
             int multiplicador = Integer.parseInt(txtMultiplicador.getText());
             int modulo = Integer.parseInt(txtModulo.getText());
-
-            lblTest.setVisible(true);
-            btnMonobit.setVisible(true);
-            btnPoker.setVisible(true);
-            btnRachas.setVisible(true);
-            btnRachasLargas.setVisible(true);
         }
     }//GEN-LAST:event_btnGenerarActionPerformed
 
