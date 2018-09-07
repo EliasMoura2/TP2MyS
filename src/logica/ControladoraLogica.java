@@ -18,7 +18,7 @@ private List <Generador> generadores = new LinkedList();
     }
 
     //Creador del generador lineal
-    public Generador altaGenerador(int modulo, int multiplicador, int incremento, int semilla) throws Exception {
+    public Generador altaGenerador(int modulo, int multiplicador, int incremento, int semilla) {
         Generador unGenerador = null;
             unGenerador = new Generador(modulo, multiplicador, incremento, semilla);
             generadores.add(unGenerador);

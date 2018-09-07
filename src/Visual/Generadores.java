@@ -300,11 +300,11 @@ public class Generadores extends javax.swing.JFrame {
             int multiplicador = Integer.parseInt(txtMultiplicador.getText());
             int modulo = Integer.parseInt(txtModulo.getText());
             if(tipoGenerador == 1){
-                try {
+                //try {
                     Generador unGenerador = miVisual.altaGenerador(modulo, multiplicador, incremento, semilla);
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, "ERROR");
-                }
+                //} catch (Exception ex) {
+                    //JOptionPane.showMessageDialog(null, "ERROR");
+                //}
             } else {
                 try {
                     Generador unGenerador = miVisual.altaGenerador(modulo, multiplicador, semilla);

@@ -16,7 +16,7 @@ public class ControladoraVisual {
         miMenu.show();
     }
     
-    public Generador altaGenerador(int modulo, int multiplicador, int incremento, int semilla) throws Exception {
+    public Generador altaGenerador(int modulo, int multiplicador, int incremento, int semilla) {
         return this.miLogica.altaGenerador(modulo, multiplicador, incremento, semilla);
     }
 
