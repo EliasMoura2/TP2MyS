@@ -145,7 +145,7 @@
                   </Group>
                   <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="btnGCL" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnGenerador" alignment="0" pref="134" max="32767" attributes="0"/>
                       <Component id="btnGCM" alignment="0" pref="134" max="32767" attributes="0"/>
                       <Component id="btnRuleta" alignment="0" max="32767" attributes="0"/>
                       <Component id="btnSalir" alignment="0" max="32767" attributes="0"/>
@@ -163,7 +163,7 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtModulo" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnGCL" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnGenerador" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -211,13 +211,13 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtModuloActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnGCL">
+        <Component class="javax.swing.JButton" name="btnGenerador">
           <Properties>
-            <Property name="text" type="java.lang.String" value="G.C.L"/>
+            <Property name="text" type="java.lang.String" value="Generador"/>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnGCLMouseClicked"/>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGCLActionPerformed"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnGeneradorMouseClicked"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGeneradorActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnGCM">

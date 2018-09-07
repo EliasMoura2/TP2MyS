@@ -6,10 +6,10 @@ import javax.swing.JOptionPane;
  *
  * @author elias
  */
-public class GCL extends javax.swing.JFrame {
+public class Generadores extends javax.swing.JFrame {
 
     /**
-     * Creates new form GCL
+     * Creates new form Generadores
      */
     
     ControladoraVisual miVisual;
@@ -18,8 +18,9 @@ public class GCL extends javax.swing.JFrame {
     int miIncremento;
     int miMultiplicador;
     int miSemilla;
+    int tipoGenerador = 0;
     
-    public GCL(ControladoraVisual miVisual, int periodo, int modulo, int incremento, int multiplicador, int semilla) {
+    public Generadores(ControladoraVisual miVisual, int periodo, int modulo, int incremento, int multiplicador, int semilla) {
         initComponents();
         this.setTitle("Generador congruencial lineal");
         //lblTest.setVisible(false);
@@ -45,6 +46,7 @@ public class GCL extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        generador = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -58,6 +60,9 @@ public class GCL extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         btnGenerar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
+        rbGCL = new javax.swing.JRadioButton();
+        rbGCM = new javax.swing.JRadioButton();
+        jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         btnMonobit = new javax.swing.JButton();
         btnPoker = new javax.swing.JButton();
@@ -122,6 +127,24 @@ public class GCL extends javax.swing.JFrame {
             }
         });
 
+        generador.add(rbGCL);
+        rbGCL.setText("GCL");
+        rbGCL.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbGCLActionPerformed(evt);
+            }
+        });
+
+        generador.add(rbGCM);
+        rbGCM.setText("GCM");
+        rbGCM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbGCMActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Tipo generador:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -139,19 +162,26 @@ public class GCL extends javax.swing.JFrame {
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtModulo))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(btnGenerar, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel5))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel3)
+                                        .addComponent(jLabel4)
+                                        .addComponent(jLabel5))
+                                    .addComponent(jLabel1))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtSemilla)
                                     .addComponent(txtMultiplicador)
-                                    .addComponent(txtIncremento, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(btnGenerar, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(txtIncremento, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(rbGCL)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(rbGCM)
+                                        .addGap(0, 0, Short.MAX_VALUE)))))
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 445, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(20, 20, 20))
@@ -179,6 +209,12 @@ public class GCL extends javax.swing.JFrame {
                             .addComponent(jLabel5)
                             .addComponent(txtSemilla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(rbGCL)
+                                .addComponent(jLabel1))
+                            .addComponent(rbGCM))
+                        .addGap(20, 20, 20)
                         .addComponent(btnGenerar)))
                 .addGap(18, 18, 18)
                 .addComponent(btnSalir)
@@ -255,17 +291,16 @@ public class GCL extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGenerarMouseMoved
 
     private void btnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarActionPerformed
-    
-        if (controlarCamposGCL()){
-                //lblTest.setVisible(true);
-                //btnMonobit.setVisible(true);
-                //btnPoker.setVisible(true);
-                //btnRachas.setVisible(true);
-                //btnRachasLargas.setVisible(true);
+        
+        if (controlarCamposGenerador()){
             int semilla = Integer.parseInt(txtSemilla.getText());
             int incremento = Integer.parseInt(txtIncremento.getText());
             int multiplicador = Integer.parseInt(txtMultiplicador.getText());
             int modulo = Integer.parseInt(txtModulo.getText());
+            if(tipoGenerador == 1){
+                
+            }
+            
         }
     }//GEN-LAST:event_btnGenerarActionPerformed
 
@@ -273,7 +308,15 @@ public class GCL extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
 
-public boolean controlarCamposGCL(){
+    private void rbGCLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbGCLActionPerformed
+        tipoGenerador = 1;
+    }//GEN-LAST:event_rbGCLActionPerformed
+
+    private void rbGCMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbGCMActionPerformed
+        tipoGenerador = 2;
+    }//GEN-LAST:event_rbGCMActionPerformed
+
+public boolean controlarCamposGenerador(){
         boolean flag = true;
         if ("".equals(txtModulo.getText())) {
             flag = false;
@@ -307,6 +350,8 @@ public boolean controlarCamposGCL(){
     private javax.swing.JButton btnRachas;
     private javax.swing.JButton btnRachasLargas;
     private javax.swing.JButton btnSalir;
+    public static javax.swing.ButtonGroup generador;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -316,6 +361,8 @@ public boolean controlarCamposGCL(){
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblTest;
+    private javax.swing.JRadioButton rbGCL;
+    private javax.swing.JRadioButton rbGCM;
     private javax.swing.JTextField txtIncremento;
     private javax.swing.JTextField txtModulo;
     private javax.swing.JTextField txtMultiplicador;

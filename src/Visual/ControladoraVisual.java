@@ -15,6 +15,8 @@ public class ControladoraVisual {
         miMenu.setLocationRelativeTo(null);
         miMenu.show();
     }
+    
+
 }
 
   

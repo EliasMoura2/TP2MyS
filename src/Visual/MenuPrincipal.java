@@ -34,7 +34,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         btnSalir = new javax.swing.JButton();
         txtModulo = new javax.swing.JTextField();
-        btnGCL = new javax.swing.JButton();
+        btnGenerador = new javax.swing.JButton();
         btnGCM = new javax.swing.JButton();
         btnRuleta = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
@@ -111,15 +111,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
-        btnGCL.setText("G.C.L");
-        btnGCL.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnGenerador.setText("Generador");
+        btnGenerador.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnGCLMouseClicked(evt);
+                btnGeneradorMouseClicked(evt);
             }
         });
-        btnGCL.addActionListener(new java.awt.event.ActionListener() {
+        btnGenerador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGCLActionPerformed(evt);
+                btnGeneradorActionPerformed(evt);
             }
         });
 
@@ -168,7 +168,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                     .addComponent(jLabel7))
                 .addGap(29, 29, 29)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnGCL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnGenerador, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
                     .addComponent(btnGCM, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
                     .addComponent(btnRuleta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -183,7 +183,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtModulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnGCL))
+                    .addComponent(btnGenerador))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGCM)
@@ -230,85 +230,83 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarActionPerformed
-        boolean salir = true;
-        int a;//multiplicador
-        int modulo; //modulo
-        int periodo;
-        int c;//incremento
-        //int Xo; //semilla
-        int k = 4; //exponente
-        int m = 0; // modulo
-        int multiplicador = 1;
-        int numero;
-        int i = 2;
-        
-        List <Integer> incrementos = new LinkedList();
-        List <Integer> multiplicadores = new LinkedList();
-        List <Integer> semillas = new LinkedList();
-        
-        miModeloComboIncremento = new DefaultComboBoxModel();
-        miModeloComboMultiplicador = new DefaultComboBoxModel();
-        miModeloComboSemilla = new DefaultComboBoxModel();
-        
-        periodo = Integer.parseInt(txtPeriodo.getText()); //toma el periodo del JtextField
-        
-        while (m < periodo){ // mientra m sea menor al periodo calcula m = 2^k
-            m =  (int) Math.pow(2, k); // funcion que devuelve los valores de m = 2^k
-            if (m < periodo){ // controla m para que k se quede con el ultimo valor usado en m=2^k
-                k ++;
-            }
-        }
+    int a;//multiplicador
+    int modulo; //modulo
+    int periodo;
+    int c;//incremento
+     //int Xo; //semilla
+    int k = 4; //exponente
+    int m = 0; // modulo
+    int multiplicador = 1;
+    int numero;
+    int i = 2;
 
-        txtModulo.setText(String.valueOf(m)); //agrega el valor obtenido de modulo al jtextField
-        
-        for(i=2;i<=m;i++){ //Algoritmo de Euclides para calcular los coprimos entre c y m
-            modulo = m;
-            numero = i;
-            while( modulo != numero) {
-                if( modulo < numero ) {
-                    numero = numero - modulo;
-                } else {
-                    modulo = modulo - numero;
-                }
-            }
-            if ((modulo == 1) || (numero == 1)){ //si son igual a 1 el mcd, es 1 por lo que es un coprimo
-                //System.out.printf("El m.c.d. entre a: %d y %d es: %d\n",m,i,a1);
-                incrementos.add(i); //agrego cada coprimo a la lista
-            }
+    List <Integer> incrementos = new LinkedList();
+    List <Integer> multiplicadores = new LinkedList();
+    List <Integer> semillas = new LinkedList();
+
+    miModeloComboIncremento = new DefaultComboBoxModel();
+    miModeloComboMultiplicador = new DefaultComboBoxModel();
+    miModeloComboSemilla = new DefaultComboBoxModel();
+
+    periodo = Integer.parseInt(txtPeriodo.getText()); //toma el periodo del JtextField
+
+    while (m < periodo){ // mientra m sea menor al periodo calcula m = 2^k
+        m =  (int) Math.pow(2, k); // funcion que devuelve los valores de m = 2^k
+        if (m < periodo){ // controla m para que k se quede con el ultimo valor usado en m=2^k
+            k ++;
         }
-        
-        miModeloComboIncremento = new DefaultComboBoxModel(); //Defino un modelo para cargar el combobox
-        //Integer x =incrementos.size(); //obtiene la cantidad de elementos de el array coPrimos
-        //System.out.print(x);
-        for (Integer incremento: incrementos){
-            miModeloComboIncremento.addElement(incremento.intValue());
-        }
-        cmbIncrementos.setModel(miModeloComboIncremento);
-        
-        for (i=1;i<=m;i++){
-            a = 4*i+1;
-            if (a <= m){
-                multiplicador = a;
-                multiplicadores.add(multiplicador); //agrega cada multiplicador a la lista
-                //System.out.printf("El multiplicador para %d es %d\n",i,multiplicador);
+    }
+
+    txtModulo.setText(String.valueOf(m)); //agrega el valor obtenido de modulo al jtextField
+
+    for(i=2;i<=m;i++){ //Algoritmo de Euclides para calcular los coprimos entre c y m
+        modulo = m;
+        numero = i;
+        while( modulo != numero) {
+            if( modulo < numero ) {
+                numero = numero - modulo;
+            } else {
+                modulo = modulo - numero;
             }
         }
-        miModeloComboMultiplicador = new DefaultComboBoxModel(); //crea un modelo
-        for (Integer multiplicador2: multiplicadores){ // for each de los elementos de la lista
-            miModeloComboMultiplicador.addElement(multiplicador2.intValue()); //agrega cada uno de los elementos de la lista al modelo
+        if ((modulo == 1) || (numero == 1)){ //si son igual a 1 el mcd, es 1 por lo que es un coprimo
+            //System.out.printf("El m.c.d. entre a: %d y %d es: %d\n",m,i,a1);
+            incrementos.add(i); //agrego cada coprimo a la lista
         }
-        cmbMultiplicadores.setModel(miModeloComboMultiplicador); // setea el jComboBox con los valores del modelo
-        
-        for(i=1;i<m;i++){
-            semillas.add(i);
+    }
+
+    miModeloComboIncremento = new DefaultComboBoxModel(); //Defino un modelo para cargar el combobox
+    //Integer x =incrementos.size(); //obtiene la cantidad de elementos de el array coPrimos
+    //System.out.print(x);
+    for (Integer incremento: incrementos){
+        miModeloComboIncremento.addElement(incremento.intValue());
+    }
+    cmbIncrementos.setModel(miModeloComboIncremento);
+
+    for (i=1;i<=m;i++){
+        a = 4*i+1;
+        if (a <= m){
+            multiplicador = a;
+            multiplicadores.add(multiplicador); //agrega cada multiplicador a la lista
+            //System.out.printf("El multiplicador para %d es %d\n",i,multiplicador);
         }
-        miModeloComboSemilla = new DefaultComboBoxModel(); //crea un modelo
-        for (Integer semilla: semillas){ // for each de los elementos de la lista
-            miModeloComboSemilla.addElement(semilla.intValue()); //agrega cada uno de los elementos de la lista al modelo
-        }
-        cmbSemillas.setModel(miModeloComboSemilla); // setea el jComboBox con los valores del modelo
-        
-        
+    }
+    miModeloComboMultiplicador = new DefaultComboBoxModel(); //crea un modelo
+    for (Integer multiplicador2: multiplicadores){ // for each de los elementos de la lista
+        miModeloComboMultiplicador.addElement(multiplicador2.intValue()); //agrega cada uno de los elementos de la lista al modelo
+    }
+    cmbMultiplicadores.setModel(miModeloComboMultiplicador); // setea el jComboBox con los valores del modelo
+
+    for(i=1;i<m;i++){
+        semillas.add(i);
+    }
+    miModeloComboSemilla = new DefaultComboBoxModel(); //crea un modelo
+    for (Integer semilla: semillas){ // for each de los elementos de la lista
+        miModeloComboSemilla.addElement(semilla.intValue()); //agrega cada uno de los elementos de la lista al modelo
+    }
+    cmbSemillas.setModel(miModeloComboSemilla); // setea el jComboBox con los valores del modelo
+
     }//GEN-LAST:event_btnGenerarActionPerformed
 
     private void txtModuloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtModuloActionPerformed
@@ -327,16 +325,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
         cmbIncrementos.setToolTipText("Primos relativos del modulo");//proporciona un mesaje al pasar el mouse por ensima del objeto
     }//GEN-LAST:event_cmbIncrementosMouseMoved
 
-    private void btnGCLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGCLActionPerformed
+    private void btnGeneradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGeneradorActionPerformed
+        Generadores nuevoGenerador = new Generadores(miVisual, Integer.parseInt(txtPeriodo.getText()),Integer.parseInt(txtModulo.getText()), (int) cmbIncrementos.getSelectedItem(), (int) cmbMultiplicadores.getSelectedItem(), (int) cmbSemillas.getSelectedItem());
+        nuevoGenerador.setLocation(250, 10);
+        nuevoGenerador.show();
+    }//GEN-LAST:event_btnGeneradorActionPerformed
 
-        GCL nuevaGCL = new GCL(miVisual, Integer.parseInt(txtPeriodo.getText()),Integer.parseInt(txtModulo.getText()), (int) cmbIncrementos.getSelectedItem(), (int) cmbMultiplicadores.getSelectedItem(), (int) cmbSemillas.getSelectedItem());
-        nuevaGCL.setLocation(250, 10);
-        nuevaGCL.show();
-    }//GEN-LAST:event_btnGCLActionPerformed
-
-    private void btnGCLMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGCLMouseClicked
+    private void btnGeneradorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGeneradorMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnGCLMouseClicked
+    }//GEN-LAST:event_btnGeneradorMouseClicked
 
     private void txtPeriodoMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtPeriodoMouseMoved
         txtPeriodo.setToolTipText("Se recomienda que sea mayor o igual a 20mil para los test F.I.P.S.");//proporciona un mesaje al pasar el mouse por ensima del objeto
@@ -345,8 +342,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnGCL;
     private javax.swing.JButton btnGCM;
+    private javax.swing.JButton btnGenerador;
     private javax.swing.JButton btnGenerar;
     private javax.swing.JButton btnRuleta;
     private javax.swing.JButton btnSalir;
