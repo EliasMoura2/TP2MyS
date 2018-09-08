@@ -1,6 +1,5 @@
 package Visual;
 
-import static java.awt.Frame.MAXIMIZED_BOTH;
 import logica.ControladoraLogica;
 import logica.Generador;
 /**
@@ -20,7 +19,7 @@ public class ControladoraVisual {
         return this.miLogica.altaGenerador(modulo, multiplicador, incremento, semilla);
     }
 
-    public Generador altaGenerador(int modulo, int multiplicador, int semilla) throws Exception {
+    public Generador altaGenerador(int modulo, int multiplicador, int semilla) {
         return this.miLogica.altaGenerador(modulo, multiplicador, semilla);
     }
 }

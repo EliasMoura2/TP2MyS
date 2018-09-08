@@ -4,6 +4,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import logica.Generador;
+import java.awt.Container;
+import java.awt.Graphics;
+import java.awt.event.ActionEvent;
 /**
  *
  * @author elias
@@ -19,7 +22,7 @@ public class Generadores extends javax.swing.JFrame {
     int miModulo;
     int miIncremento;
     int miMultiplicador;
-    int miSemilla;
+    Generador unGenerador;
     int tipoGenerador = 0;
     
     public Generadores(ControladoraVisual miVisual, int periodo, int modulo, int incremento, int multiplicador, int semilla) {
@@ -36,8 +39,6 @@ public class Generadores extends javax.swing.JFrame {
         txtSemilla.setText(String.valueOf(semilla));
         //miPeriodo=periodo;
     }
-
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -293,24 +294,24 @@ public class Generadores extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGenerarMouseMoved
 
     private void btnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarActionPerformed
-        
         if (controlarCamposGenerador()){
             int semilla = Integer.parseInt(txtSemilla.getText());
             int incremento = Integer.parseInt(txtIncremento.getText());
             int multiplicador = Integer.parseInt(txtMultiplicador.getText());
             int modulo = Integer.parseInt(txtModulo.getText());
             if(tipoGenerador == 1){
-                //try {
-                    Generador unGenerador = miVisual.altaGenerador(modulo, multiplicador, incremento, semilla);
+                //==try {
+                    unGenerador = miVisual.altaGenerador(modulo, multiplicador, incremento, semilla);
                 //} catch (Exception ex) {
                     //JOptionPane.showMessageDialog(null, "ERROR");
                 //}
-            } else {
-                try {
-                    Generador unGenerador = miVisual.altaGenerador(modulo, multiplicador, semilla);
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, "ERROR");
-                }
+            } 
+            if (tipoGenerador == 2){
+                //try {
+                    unGenerador = miVisual.altaGenerador(modulo, multiplicador, semilla);
+                //} catch (Exception ex) {
+                    //JOptionPane.showMessageDialog(null, "ERROR");
+                //}
             }
             
         }
@@ -351,10 +352,7 @@ public boolean controlarCamposGenerador(){
         }
         return flag;
     }    
-    
-    
-    
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGenerar;
     private javax.swing.JButton btnMonobit;

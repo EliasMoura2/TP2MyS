@@ -25,7 +25,7 @@ private List <Generador> generadores = new LinkedList();
         return unGenerador;
     }
     //creador del generador multiplicativo
-    public Generador altaGenerador(int modulo, int multiplicador, int semilla) throws Exception {
+    public Generador altaGenerador(int modulo, int multiplicador, int semilla) {
         Generador unGenerador = null;
             unGenerador = new Generador(modulo, multiplicador, semilla);
             generadores.add(unGenerador);

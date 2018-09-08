@@ -10,7 +10,7 @@ import logica.Generador;
  *
  * @author elias
  */
-public class ModeloTablaGenerador extends AbstractTableModel {
+/*public class ModeloTablaGenerador extends AbstractTableModel {
     private String[] nombreColumnas = {"n","semilla","valor sin estandarizar","valor estandarizado"};
     private Object[][] datos;
     
@@ -48,4 +48,4 @@ public class ModeloTablaGenerador extends AbstractTableModel {
     public String getColumnName(int column){
     return this.nombreColumnas[column];
     }
-}
+}*/

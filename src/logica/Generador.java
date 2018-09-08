@@ -1,21 +1,19 @@
-
 package logica;
 
 import java.util.LinkedList;
 import java.util.List;
 
-
 public class Generador {
 //-------------------------------Atributos--------------------------------------
     //private int id;
     private int cantidadNumerosGenerar = 20000;
-    double modulo;
-    double multiplicador;
-    double incremento;
-    double semilla;
-    List <Double> valoresGeneradosNoEstandarizados = new LinkedList();
+    int modulo;
+    int multiplicador;
+    int incremento;
+    int semilla;
+    List <Integer> valoresGeneradosNoEstandarizados = new LinkedList();
     List <Double> valoresGeneradosEstandarizados = new LinkedList();
-    List <Double> semillas = new LinkedList();
+    List <Integer> semillas = new LinkedList();
 //-----------------------------Constructores------------------------------------
 public Generador (){}
     
@@ -25,52 +23,53 @@ public Generador(int modulo, int multiplicador, int incremento, int semilla) {
         this.incremento = incremento;
         this.semilla = semilla;
         correrGeneradorLineal();
-        
 }
 
 public Generador(int modulo, int multiplicador, int semilla) {
         this.modulo = modulo;
         this.multiplicador = multiplicador;
         this.semilla = semilla;
-        correrGeneradorMultiplicativo();
+        correrGeneradorMultiplicativo();  
 }
 //-------------------------------Metodos----------------------------------------
     public void correrGeneradorLineal() {
-        double valor;
-        //semillas.add(semilla);
+        int Xn;
+        semillas.add(semilla);
         for(int i=0; i<cantidadNumerosGenerar; i++){
-            valor = GCL();
-            semillas.add(valor);
-            valoresGeneradosNoEstandarizados.add(valor);
-            valoresGeneradosEstandarizados.add(estandarizar(valor));
+            Xn= GCL(this.modulo, this.multiplicador, this.incremento, this.semilla);
+            valoresGeneradosNoEstandarizados.add(Xn);
+            valoresGeneradosEstandarizados.add(estandarizar(Xn));
+            semillas.add(Xn);
         }
     }
         
-    public double GCL(){
-        double retorno;
-        retorno = (this.semilla * this.multiplicador + this.incremento) % this.modulo;
-        this.semilla = retorno;
-        return retorno;
+    public int GCL(int modulo, int multiplicador, int incremento, int semilla){
+        int Xn;
+        Xn = (semilla * multiplicador + incremento) % modulo;
+        this.semilla = Xn;
+        return Xn;
     }
     
     public void correrGeneradorMultiplicativo() {
-        double valor;
+        int Xn;
+        semillas.add(semilla);
         for(int i=0; i<cantidadNumerosGenerar; i++){
-            valor = GCL();
-            valoresGeneradosNoEstandarizados.add(valor);
-            valoresGeneradosEstandarizados.add(estandarizar(valor));
+            Xn= GCM(this.modulo, this.multiplicador, this.semilla);
+            valoresGeneradosNoEstandarizados.add(Xn);
+            valoresGeneradosEstandarizados.add(estandarizar(Xn));
+            semillas.add(Xn);
         }
     }
         
-    public double GCM(){
-        double retorno;
-        retorno = (this.semilla * this.multiplicador ) % this.modulo;
-        this.semilla = retorno;
-        return retorno;
+    public int GCM(int modulo, int multiplicador, int semilla){
+        int Xn;
+        Xn = (this.semilla * this.multiplicador ) % this.modulo;
+        this.semilla = Xn;
+        return Xn;
     }
         
-    private double estandarizar(double valor){
-        double estandarizado = valor/this.modulo;
+    private double estandarizar(int Xn){
+        double estandarizado = Xn/this.modulo;
         return estandarizado;
     }
 
@@ -80,7 +79,7 @@ public Generador(int modulo, int multiplicador, int semilla) {
         return modulo;
     }
 
-    public void setModulo(double modulo) {
+    public void setModulo(int modulo) {
         this.modulo = modulo;
     }
 
@@ -88,7 +87,7 @@ public Generador(int modulo, int multiplicador, int semilla) {
         return multiplicador;
     }
 
-    public void setMultiplicador(double multiplicador) {
+    public void setMultiplicador(int multiplicador) {
         this.multiplicador = multiplicador;
     }
 
@@ -96,7 +95,7 @@ public Generador(int modulo, int multiplicador, int semilla) {
         return incremento;
     }
 
-    public void setIncremento(double incremento) {
+    public void setIncremento(int incremento) {
         this.incremento = incremento;
     }
 
@@ -104,15 +103,15 @@ public Generador(int modulo, int multiplicador, int semilla) {
         return semilla;
     }
 
-    public void setSemilla(double semilla) {
+    public void setSemilla(int semilla) {
         this.semilla = semilla;
     }
 
-    public List<Double> getValoresGeneradosNoEstandarizados() {
+    public List<Integer> getValoresGeneradosNoEstandarizados() {
         return valoresGeneradosNoEstandarizados;
     }
 
-    public void setValoresGeneradosNoEstandarizados(List<Double> valoresGeneradosNoEstandarizados) {
+    public void setValoresGeneradosNoEstandarizados(List<Integer> valoresGeneradosNoEstandarizados) {
         this.valoresGeneradosNoEstandarizados = valoresGeneradosNoEstandarizados;
     }
 
