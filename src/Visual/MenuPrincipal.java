@@ -229,7 +229,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     int periodo;
     int c;//incremento
      //int Xo; //semilla
-    int k = 4; //exponente
+    int k = 0; //exponente
     int m = 0; // modulo
     int multiplicador = 1;
     int numero;

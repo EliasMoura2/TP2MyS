@@ -20,7 +20,7 @@ public class Generadores extends javax.swing.JFrame {
     ControladoraVisual miVisual;
     private ModeloTablaDetalles miModeloTablaDetalles;
     private List<Generador> generadores= new LinkedList();
-   // private boolean flag=false;
+    private boolean flag=false;
     int miPeriodo;
     int miModulo;
     int miIncremento;
@@ -268,13 +268,18 @@ public class Generadores extends javax.swing.JFrame {
     private void btnGCLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGCLActionPerformed
         if (controlarCamposGenerador()){
             //setearTamañoTabla();
-            int semilla2 = Integer.parseInt(txtSemilla.getText());
-            int incremento2 = Integer.parseInt(txtIncremento.getText());
-            int multiplicador2 = Integer.parseInt(txtMultiplicador.getText());
-            int modulo2 = Integer.parseInt(txtModulo.getText());
+            int semilla = Integer.parseInt(txtSemilla.getText());
+            int incremento = Integer.parseInt(txtIncremento.getText());
+            int multiplicador = Integer.parseInt(txtMultiplicador.getText());
+            int modulo = Integer.parseInt(txtModulo.getText());
 
             //try {
-                Generador miGenerador = miVisual.altaGenerador(modulo2, multiplicador2, incremento2, semilla2);
+                Generador miGenerador = miVisual.altaGenerador(modulo, multiplicador, incremento, semilla);
+                
+                for (int i=0; i < (miGenerador.getSemillas().size()-1); i++){
+                    System.out.printf("N: %d Xo: %d Xn+1:%d Estandarizado: %f \n",i,miGenerador.getSemillas().get(i),miGenerador.getValoresGeneradosNoEstandarizados().get(i), miGenerador.getValoresGeneradosEstandarizados().get(i));
+                }
+
                 cargarFilaTabla(miGenerador);
                 //JOptionPane.showMessageDialog(null, "Generador creado exitosamente", "COMFIRMACION", 0);
             //} catch (Exception ex) {
@@ -291,7 +296,7 @@ public class Generadores extends javax.swing.JFrame {
 
     }//GEN-LAST:event_txtModuloActionPerformed
 
-    /*public void setearTamañoTabla() {
+    public void setearTamañoTabla() {
         TableColumn columna1 = jTableDetalles.getColumn("n");
         columna1.setPreferredWidth(25);
         TableColumn columna2 = jTableDetalles.getColumn("semilla");
@@ -300,33 +305,11 @@ public class Generadores extends javax.swing.JFrame {
         columna3.setPreferredWidth(25);
         TableColumn columna4 = jTableDetalles.getColumn("estandarizado");
         columna4.setPreferredWidth(25);
-    }*/
+    }
 
     public void cargarFilaTabla(Generador miGenerador) {
-        //if (flag == false) {
             generadores.add(miGenerador);
-            //flag = true;
             miModeloTablaDetalles = new ModeloTablaDetalles(miGenerador);
-        //} else {
-            //int cantidadFilas = cantidades.length + 1;
-            //int[] misCantidades = new int[cantidadFilas];
-            //double[] misPrecios = new double[cantidadFilas];
-            //for (int i = 0; i < (cantidades.length + 1); i++) {
-                //if (i < cantidades.length) {
-                    //misCantidades[i] = cantidades[i];
-                    //misPrecios[i] = precios[i];
-                //} else {
-                    //misCantidades[i] = Integer.parseInt(txtCantidad.getText());
-                    //misPrecios[i] = precio;
-                    //productos.add(unProducto);
-                //}
-            //}
-            //miModeloTablaDetalles = new ModeloTablaDetalles(productos, misCantidades, misPrecios);
-            //cantidades = new int[cantidadFilas];
-            //cantidades = misCantidades;
-            //precios = new double[cantidadFilas];
-            //precios = misPrecios;
-        //}
         jTableDetalles.setModel(miModeloTablaDetalles);
     }
     

@@ -6,7 +6,7 @@ import java.util.List;
 public class Generador {
 //-------------------------------Atributos--------------------------------------
     //private int id;
-    private int cantidadNumerosGenerar = 20000;
+    private int cantidadNumerosGenerar = 20;
     int modulo;
     int multiplicador;
     int incremento;
@@ -22,7 +22,7 @@ public Generador(int modulo, int multiplicador, int incremento, int semilla) {
         this.multiplicador = multiplicador;
         this.incremento = incremento;
         this.semilla = semilla;
-        correrGeneradorLineal(modulo, multiplicador, incremento, semilla);
+        correrGeneradorLineal();
 }
 
 public Generador(int modulo, int multiplicador, int semilla) {
@@ -32,20 +32,22 @@ public Generador(int modulo, int multiplicador, int semilla) {
         correrGeneradorMultiplicativo(modulo, multiplicador, semilla);  
 }
 //-------------------------------Metodos----------------------------------------
-    public void correrGeneradorLineal(int modulo, int multiplicador, int incremento, int semilla) {
-        int Xn;
-        semillas.add(semilla);
+    public void correrGeneradorLineal() {
+        int Xn =this.semilla;
+        semillas.add(this.semilla);
+        //System.out.printf("la primer semilla es: %d\n",Xn);
         for(int i=0; i<cantidadNumerosGenerar; i++){
-            Xn= GCL(modulo, multiplicador, incremento, semilla);
+            Xn= GCL();
+            //System.out.printf("la siguiente semillas es: %d\n",Xn);
             valoresGeneradosNoEstandarizados.add(Xn);
-            valoresGeneradosEstandarizados.add(estandarizar(Xn, modulo));
+            valoresGeneradosEstandarizados.add(estandarizar(Xn, this.modulo));
             semillas.add(Xn);
         }
     }
         
-    public int GCL(int modulo, int multiplicador, int incremento, int semilla){
+    public int GCL(){
         int Xn;
-        Xn = (semilla * multiplicador + incremento) % modulo;
+        Xn = (this.semilla * this.multiplicador + this.incremento) % this.modulo;
         this.semilla = Xn;
         return Xn;
     }
@@ -69,7 +71,8 @@ public Generador(int modulo, int multiplicador, int semilla) {
     }
         
     private double estandarizar(int Xn, int modulo){
-        double estandarizado = Xn/modulo;
+        double estandarizado = (double) Xn / modulo;
+        //System.out.printf("el estandarizado es: %f\n",estandarizado);
         return estandarizado;
     }
 
