@@ -19,17 +19,27 @@ private List <Generador> generadores = new LinkedList();
 
     //Creador del generador lineal
     public Generador altaGenerador(int modulo, int multiplicador, int incremento, int semilla) {
-        Generador unGenerador = null;
+        Generador unGenerador;
             unGenerador = new Generador(modulo, multiplicador, incremento, semilla);
             generadores.add(unGenerador);
         return unGenerador;
     }
     //creador del generador multiplicativo
     public Generador altaGenerador(int modulo, int multiplicador, int semilla) {
-        Generador unGenerador = null;
+        Generador unGenerador;
             unGenerador = new Generador(modulo, multiplicador, semilla);
             generadores.add(unGenerador);
         return unGenerador;
     }
+
+    public List<Generador> getGeneradores() {
+        return generadores;
+    }
+
+    public void setGeneradores(List<Generador> generadores) {
+        this.generadores = generadores;
+    }
+    
+    
     
 }

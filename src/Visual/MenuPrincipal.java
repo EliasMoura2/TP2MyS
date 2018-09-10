@@ -15,10 +15,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
     DefaultComboBoxModel miModeloComboIncremento = new DefaultComboBoxModel();
     DefaultComboBoxModel miModeloComboSemilla = new DefaultComboBoxModel();
     
-    public MenuPrincipal(ControladoraVisual miVisual) {
+    public MenuPrincipal(ControladoraVisual visual) {
         initComponents();
         this.setTitle("Pagina principal");
         txtModulo.setEnabled(false);
+        miVisual = visual;
     }
 
 

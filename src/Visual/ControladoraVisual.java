@@ -2,6 +2,7 @@ package Visual;
 
 import logica.ControladoraLogica;
 import logica.Generador;
+import java.util.List;
 /**
  *
  * @author elias

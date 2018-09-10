@@ -1,43 +1,40 @@
 package Visual;
 
+import java.awt.event.KeyEvent;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.table.TableColumn;
+
+import modeloDeTablas.ModeloTablaDetalles;
 import javax.swing.JOptionPane;
 import logica.Generador;
-import java.awt.Container;
-import java.awt.Graphics;
-import java.awt.event.ActionEvent;
+
 /**
  *
  * @author elias
  */
 public class Generadores extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Generadores
-     */
-    
     ControladoraVisual miVisual;
+    private ModeloTablaDetalles miModeloTablaDetalles;
+    private List<Generador> generadores= new LinkedList();
+   // private boolean flag=false;
     int miPeriodo;
     int miModulo;
     int miIncremento;
     int miMultiplicador;
-    Generador unGenerador;
-    int tipoGenerador = 0;
     
-    public Generadores(ControladoraVisual miVisual, int periodo, int modulo, int incremento, int multiplicador, int semilla) {
+    public Generadores(ControladoraVisual visual, int periodo, int modulo, int incremento, int multiplicador, int semilla) {
         initComponents();
+        miVisual = visual;
         this.setTitle("Generador congruencial lineal");
-        //lblTest.setVisible(false);
-        //btnMonobit.setVisible(false);
-        //btnPoker.setVisible(false);
-        //btnRachas.setVisible(false);
-        //btnRachasLargas.setVisible(false);
         txtModulo.setText(String.valueOf(modulo));
         txtIncremento.setText(String.valueOf(incremento));
         txtMultiplicador.setText(String.valueOf(multiplicador));
         txtSemilla.setText(String.valueOf(semilla));
-        //miPeriodo=periodo;
+        //setearTamañoTabla();
     }
 
     /**
@@ -49,7 +46,6 @@ public class Generadores extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        generador = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -60,12 +56,10 @@ public class Generadores extends javax.swing.JFrame {
         txtMultiplicador = new javax.swing.JTextField();
         txtIncremento = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        btnGenerar = new javax.swing.JButton();
+        jTableDetalles = new javax.swing.JTable();
         btnSalir = new javax.swing.JButton();
-        rbGCL = new javax.swing.JRadioButton();
-        rbGCM = new javax.swing.JRadioButton();
-        jLabel1 = new javax.swing.JLabel();
+        btnGCL = new javax.swing.JButton();
+        btnGCM = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         btnMonobit = new javax.swing.JButton();
         btnPoker = new javax.swing.JButton();
@@ -89,7 +83,7 @@ public class Generadores extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableDetalles.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"", null, null, null},
                 {null, null, null, null},
@@ -109,19 +103,7 @@ public class Generadores extends javax.swing.JFrame {
                 "n", "Semilla", "Xn+1", "Estandarizado"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
-
-        btnGenerar.setText("Generar nros");
-        btnGenerar.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                btnGenerarMouseMoved(evt);
-            }
-        });
-        btnGenerar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGenerarActionPerformed(evt);
-            }
-        });
+        jScrollPane1.setViewportView(jTableDetalles);
 
         btnSalir.setText("Salir");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -130,23 +112,19 @@ public class Generadores extends javax.swing.JFrame {
             }
         });
 
-        generador.add(rbGCL);
-        rbGCL.setText("GCL");
-        rbGCL.addActionListener(new java.awt.event.ActionListener() {
+        btnGCL.setText("GCL");
+        btnGCL.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rbGCLActionPerformed(evt);
+                btnGCLActionPerformed(evt);
             }
         });
 
-        generador.add(rbGCM);
-        rbGCM.setText("GCM");
-        rbGCM.addActionListener(new java.awt.event.ActionListener() {
+        btnGCM.setText("GCM");
+        btnGCM.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rbGCMActionPerformed(evt);
+                btnGCMActionPerformed(evt);
             }
         });
-
-        jLabel1.setText("Tipo generador:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -154,39 +132,33 @@ public class Generadores extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(37, 37, 37)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtModulo))
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(37, 37, 37)
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtModulo))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(btnGenerar, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtSemilla)
+                            .addComponent(txtMultiplicador)
+                            .addComponent(txtIncremento)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jLabel3)
-                                        .addComponent(jLabel4)
-                                        .addComponent(jLabel5))
-                                    .addComponent(jLabel1))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtSemilla)
-                                    .addComponent(txtMultiplicador)
-                                    .addComponent(txtIncremento, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(rbGCL)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(rbGCM)
-                                        .addGap(0, 0, Short.MAX_VALUE)))))
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 445, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(btnGCM, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnGCL, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(313, 313, 313)
+                        .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 445, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20))
         );
         jPanel1Layout.setVerticalGroup(
@@ -194,7 +166,10 @@ public class Generadores extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(21, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnSalir))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
@@ -212,15 +187,9 @@ public class Generadores extends javax.swing.JFrame {
                             .addComponent(jLabel5)
                             .addComponent(txtSemilla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(rbGCL)
-                                .addComponent(jLabel1))
-                            .addComponent(rbGCM))
-                        .addGap(20, 20, 20)
-                        .addComponent(btnGenerar)))
-                .addGap(18, 18, 18)
-                .addComponent(btnSalir)
+                        .addComponent(btnGCL)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnGCM)))
                 .addContainerGap())
         );
 
@@ -244,7 +213,7 @@ public class Generadores extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblTest)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
                 .addComponent(btnMonobit, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnPoker, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -285,50 +254,82 @@ public class Generadores extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtModuloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtModuloActionPerformed
-
-    }//GEN-LAST:event_txtModuloActionPerformed
-
-    private void btnGenerarMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGenerarMouseMoved
-        btnGenerar.setToolTipText("generar datos para los generadores"); //proporciona un mesaje al pasar el mouse por ensima del objeto
-    }//GEN-LAST:event_btnGenerarMouseMoved
-
-    private void btnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarActionPerformed
+    private void btnGCMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGCMActionPerformed
         if (controlarCamposGenerador()){
-            int semilla = Integer.parseInt(txtSemilla.getText());
-            int incremento = Integer.parseInt(txtIncremento.getText());
-            int multiplicador = Integer.parseInt(txtMultiplicador.getText());
-            int modulo = Integer.parseInt(txtModulo.getText());
-            if(tipoGenerador == 1){
-                //==try {
-                    unGenerador = miVisual.altaGenerador(modulo, multiplicador, incremento, semilla);
-                //} catch (Exception ex) {
-                    //JOptionPane.showMessageDialog(null, "ERROR");
-                //}
-            } 
-            if (tipoGenerador == 2){
-                //try {
-                    unGenerador = miVisual.altaGenerador(modulo, multiplicador, semilla);
-                //} catch (Exception ex) {
-                    //JOptionPane.showMessageDialog(null, "ERROR");
-                //}
-            }
-            
+            //setearTamañoTabla();
+            int semilla2 = Integer.parseInt(txtSemilla.getText());
+            int multiplicador2 = Integer.parseInt(txtMultiplicador.getText());
+            int modulo2 = Integer.parseInt(txtModulo.getText());
+
+            Generador miGenerador = miVisual.altaGenerador(modulo2, multiplicador2, semilla2);
         }
-    }//GEN-LAST:event_btnGenerarActionPerformed
+    }//GEN-LAST:event_btnGCMActionPerformed
+
+    private void btnGCLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGCLActionPerformed
+        if (controlarCamposGenerador()){
+            //setearTamañoTabla();
+            int semilla2 = Integer.parseInt(txtSemilla.getText());
+            int incremento2 = Integer.parseInt(txtIncremento.getText());
+            int multiplicador2 = Integer.parseInt(txtMultiplicador.getText());
+            int modulo2 = Integer.parseInt(txtModulo.getText());
+
+            //try {
+                Generador miGenerador = miVisual.altaGenerador(modulo2, multiplicador2, incremento2, semilla2);
+                cargarFilaTabla(miGenerador);
+                //JOptionPane.showMessageDialog(null, "Generador creado exitosamente", "COMFIRMACION", 0);
+            //} catch (Exception ex) {
+                //JOptionPane.showMessageDialog(null, "No se pudo crear el generador", "ERROR",0);
+            //}
+        }
+    }//GEN-LAST:event_btnGCLActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
 
-    private void rbGCLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbGCLActionPerformed
-        tipoGenerador = 1;
-    }//GEN-LAST:event_rbGCLActionPerformed
+    private void txtModuloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtModuloActionPerformed
 
-    private void rbGCMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbGCMActionPerformed
-        tipoGenerador = 2;
-    }//GEN-LAST:event_rbGCMActionPerformed
+    }//GEN-LAST:event_txtModuloActionPerformed
 
+    /*public void setearTamañoTabla() {
+        TableColumn columna1 = jTableDetalles.getColumn("n");
+        columna1.setPreferredWidth(25);
+        TableColumn columna2 = jTableDetalles.getColumn("semilla");
+        columna2.setPreferredWidth(25);
+        TableColumn columna3 = jTableDetalles.getColumn("Xn+1");
+        columna3.setPreferredWidth(25);
+        TableColumn columna4 = jTableDetalles.getColumn("estandarizado");
+        columna4.setPreferredWidth(25);
+    }*/
+
+    public void cargarFilaTabla(Generador miGenerador) {
+        //if (flag == false) {
+            generadores.add(miGenerador);
+            //flag = true;
+            miModeloTablaDetalles = new ModeloTablaDetalles(miGenerador);
+        //} else {
+            //int cantidadFilas = cantidades.length + 1;
+            //int[] misCantidades = new int[cantidadFilas];
+            //double[] misPrecios = new double[cantidadFilas];
+            //for (int i = 0; i < (cantidades.length + 1); i++) {
+                //if (i < cantidades.length) {
+                    //misCantidades[i] = cantidades[i];
+                    //misPrecios[i] = precios[i];
+                //} else {
+                    //misCantidades[i] = Integer.parseInt(txtCantidad.getText());
+                    //misPrecios[i] = precio;
+                    //productos.add(unProducto);
+                //}
+            //}
+            //miModeloTablaDetalles = new ModeloTablaDetalles(productos, misCantidades, misPrecios);
+            //cantidades = new int[cantidadFilas];
+            //cantidades = misCantidades;
+            //precios = new double[cantidadFilas];
+            //precios = misPrecios;
+        //}
+        jTableDetalles.setModel(miModeloTablaDetalles);
+    }
+    
 public boolean controlarCamposGenerador(){
         boolean flag = true;
         if ("".equals(txtModulo.getText())) {
@@ -354,14 +355,13 @@ public boolean controlarCamposGenerador(){
     }    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnGenerar;
+    private javax.swing.JButton btnGCL;
+    private javax.swing.JButton btnGCM;
     private javax.swing.JButton btnMonobit;
     private javax.swing.JButton btnPoker;
     private javax.swing.JButton btnRachas;
     private javax.swing.JButton btnRachasLargas;
     private javax.swing.JButton btnSalir;
-    public static javax.swing.ButtonGroup generador;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -369,10 +369,8 @@ public boolean controlarCamposGenerador(){
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTableDetalles;
     private javax.swing.JLabel lblTest;
-    private javax.swing.JRadioButton rbGCL;
-    private javax.swing.JRadioButton rbGCM;
     private javax.swing.JTextField txtIncremento;
     private javax.swing.JTextField txtModulo;
     private javax.swing.JTextField txtMultiplicador;
