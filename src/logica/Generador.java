@@ -6,7 +6,7 @@ import java.util.List;
 public class Generador {
 //-------------------------------Atributos--------------------------------------
     //private int id;
-    private int cantidadNumerosGenerar = 20;
+    private int cantidadNumerosGenerar = 20000;
     int modulo;
     int multiplicador;
     int incremento;
@@ -14,6 +14,7 @@ public class Generador {
     List <Integer> valoresGeneradosNoEstandarizados = new LinkedList();
     List <Double> valoresGeneradosEstandarizados = new LinkedList();
     List <Integer> semillas = new LinkedList();
+    List <Integer> binarios = new LinkedList();
 //-----------------------------Constructores------------------------------------
 public Generador (){}
     
@@ -43,6 +44,7 @@ public Generador(int modulo, int multiplicador, int semilla) {
             valoresGeneradosEstandarizados.add(estandarizar(Xn, this.modulo));
             semillas.add(Xn);
         }
+        cargarLBinarios();
     }
     
        
@@ -62,6 +64,7 @@ public Generador(int modulo, int multiplicador, int semilla) {
             valoresGeneradosEstandarizados.add(estandarizar(Xn, modulo));
             semillas.add(Xn);
         }
+        cargarLBinarios();
     }
         
     public int GCM(){
@@ -76,6 +79,18 @@ public Generador(int modulo, int multiplicador, int semilla) {
         return estandarizado;
     }
 
+    public void cargarLBinarios (){
+        for(int i=0;i<valoresGeneradosEstandarizados.size();i++){
+            if (valoresGeneradosEstandarizados.get(i)<0.5){
+                binarios.add(0);
+            }else{
+                binarios.add(1);
+            }
+        }
+    }
+    
+    
+    
 //--------------------------Getters and Setters---------------------------------
 
     public double getModulo() {
@@ -132,6 +147,14 @@ public Generador(int modulo, int multiplicador, int semilla) {
 
     public void setSemillas(List<Integer> semillas) {
         this.semillas = semillas;
+    }
+
+    public List<Integer> getBinarios() {
+        return binarios;
+    }
+
+    public void setBinarios(List<Integer> binarios) {
+        this.binarios = binarios;
     }
 
     

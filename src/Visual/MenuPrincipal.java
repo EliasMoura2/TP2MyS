@@ -3,6 +3,7 @@ package Visual;
 import java.util.LinkedList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -20,6 +21,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
         this.setTitle("Pagina principal");
         txtModulo.setEnabled(false);
         miVisual = visual;
+        btnGenerador.setEnabled(false);
+        btnRuleta.setEnabled(false);  
     }
 
 
@@ -229,16 +232,19 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarActionPerformed
+    if(controlarCamposGenerador()){
     int a;//multiplicador
     int modulo; //modulo
     int periodo;
     int c;//incremento
      //int Xo; //semilla
-    int k = 0; //exponente
+    int k = 4; //exponente, M=2^k >=4
     int m = 0; // modulo
     int multiplicador = 1;
     int numero;
     int i = 2;
+    
+    
 
     List <Integer> incrementos = new LinkedList();
     List <Integer> multiplicadores = new LinkedList();
@@ -306,6 +312,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }
     cmbSemillas.setModel(miModeloComboSemilla); // setea el jComboBox con los valores del modelo
 
+    btnGenerador.setEnabled(true);
+    btnRuleta.setEnabled(true);  
+    }
     }//GEN-LAST:event_btnGenerarActionPerformed
 
     private void txtModuloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtModuloActionPerformed
@@ -345,7 +354,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtPeriodoKeyTyped
 
-
+public boolean controlarCamposGenerador(){
+        boolean flag = true;
+        if ("".equals(txtPeriodo.getText())) {
+            flag = false;
+            JOptionPane.showMessageDialog(null, "Ingrese el periodo");
+        }
+        return flag;
+    } 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGenerador;

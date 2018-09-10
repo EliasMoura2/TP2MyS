@@ -20,7 +20,7 @@ public class Generadores extends javax.swing.JFrame {
     ControladoraVisual miVisual;
     private ModeloTablaDetalles miModeloTablaDetalles;
     private List<Generador> generadores= new LinkedList();
-    private boolean flag=false;
+    Generador miGenerador;
     int miPeriodo;
     int miModulo;
     int miIncremento;
@@ -253,7 +253,7 @@ public class Generadores extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblTest)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnMonobit, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnPoker, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -286,7 +286,7 @@ public class Generadores extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -301,7 +301,7 @@ public class Generadores extends javax.swing.JFrame {
             int multiplicador = Integer.parseInt(txtMultiplicador.getText());
             int modulo = Integer.parseInt(txtModulo.getText());
             //try {
-                Generador miGenerador = miVisual.altaGenerador(modulo, multiplicador, semilla);
+                miGenerador = miVisual.altaGenerador(modulo, multiplicador, semilla);
                 cargarFilaTabla(miGenerador);
                 //JOptionPane.showMessageDialog(null, "Generador creado exitosamente", "COMFIRMACION", 0);
             //} catch (Exception ex) {
@@ -323,9 +323,10 @@ public class Generadores extends javax.swing.JFrame {
             int multiplicador = Integer.parseInt(txtMultiplicador.getText());
             int modulo = Integer.parseInt(txtModulo.getText());
             //try {
-                Generador miGenerador = miVisual.altaGenerador(modulo, multiplicador, incremento, semilla);
+                miGenerador = miVisual.altaGenerador(modulo, multiplicador, incremento, semilla);
                 //for (int i=0; i < (miGenerador.getSemillas().size()-1); i++){
                     //System.out.printf("N: %d Xo: %d Xn+1:%d Estandarizado: %f \n",i,miGenerador.getSemillas().get(i),miGenerador.getValoresGeneradosNoEstandarizados().get(i), miGenerador.getValoresGeneradosEstandarizados().get(i));
+                    //System.out.printf("%d\n", miGenerador.getBinarios().get(i));
                 //}
                 cargarFilaTabla(miGenerador);
                 //JOptionPane.showMessageDialog(null, "Generador creado exitosamente", "COMFIRMACION", 0);
@@ -377,7 +378,17 @@ public class Generadores extends javax.swing.JFrame {
     }//GEN-LAST:event_txtSemillaKeyTyped
 
     private void btnMonobitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMonobitActionPerformed
-        
+        int cont = 0;
+        for(int i=0;i<(miGenerador.getBinarios().size());i++){
+            if((miGenerador.getBinarios().get(i))==1){
+                cont++;
+            }
+        }
+        if(cont>=9275 && cont<=10275){
+            JOptionPane.showMessageDialog(null, "La secuencia paso el test monobit \n"+cont+" [9275-10275]\n");
+        }else{
+            JOptionPane.showMessageDialog(null, "La secuencia no paso el test monobit \n"+cont+" [9275-10275]\n");
+        }
     }//GEN-LAST:event_btnMonobitActionPerformed
 
     /*public void setearTamañoTabla() {
