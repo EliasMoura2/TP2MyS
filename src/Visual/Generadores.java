@@ -34,7 +34,12 @@ public class Generadores extends javax.swing.JFrame {
         txtIncremento.setText(String.valueOf(incremento));
         txtMultiplicador.setText(String.valueOf(multiplicador));
         txtSemilla.setText(String.valueOf(semilla));
-        //setearTamañoTabla();
+        lblTest.setEnabled(false);
+        btnMonobit.setEnabled(false);
+        btnPoker.setEnabled(false);
+        btnRachas.setEnabled(false);
+        btnRachasLargas.setEnabled(false);
+        
     }
 
     /**
@@ -302,6 +307,11 @@ public class Generadores extends javax.swing.JFrame {
             //} catch (Exception ex) {
                 //JOptionPane.showMessageDialog(null, "No se pudo crear el generador", "ERROR",0);
             //}
+            lblTest.setEnabled(true);
+            btnMonobit.setEnabled(true);
+            btnPoker.setEnabled(true);
+            btnRachas.setEnabled(true);
+            btnRachasLargas.setEnabled(true);
         }        
     }//GEN-LAST:event_btnGCMActionPerformed
 
@@ -322,6 +332,11 @@ public class Generadores extends javax.swing.JFrame {
             //} catch (Exception ex) {
                 //JOptionPane.showMessageDialog(null, "No se pudo crear el generador", "ERROR",0);
             //}
+            lblTest.setEnabled(true);
+            btnMonobit.setEnabled(true);
+            btnPoker.setEnabled(true);
+            btnRachas.setEnabled(true);
+            btnRachasLargas.setEnabled(true);
         }
     }//GEN-LAST:event_btnGCLActionPerformed
 
