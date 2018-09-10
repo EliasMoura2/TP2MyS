@@ -61,6 +61,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 txtPeriodoMouseMoved(evt);
             }
         });
+        txtPeriodo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPeriodoKeyTyped(evt);
+            }
+        });
 
         btnGenerar.setText("Generar");
         btnGenerar.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -332,6 +337,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void txtPeriodoMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtPeriodoMouseMoved
         txtPeriodo.setToolTipText("Se recomienda que sea mayor o igual a 20mil para los test F.I.P.S.");//proporciona un mesaje al pasar el mouse por ensima del objeto
     }//GEN-LAST:event_txtPeriodoMouseMoved
+
+    private void txtPeriodoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPeriodoKeyTyped
+        char car = evt.getKeyChar();
+        if((car<'0')||( car>'9')){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtPeriodoKeyTyped
 
 
 

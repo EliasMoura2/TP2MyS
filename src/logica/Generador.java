@@ -29,11 +29,11 @@ public Generador(int modulo, int multiplicador, int semilla) {
         this.modulo = modulo;
         this.multiplicador = multiplicador;
         this.semilla = semilla;
-        correrGeneradorMultiplicativo(modulo, multiplicador, semilla);  
+        correrGeneradorMultiplicativo();  
 }
 //-------------------------------Metodos----------------------------------------
     public void correrGeneradorLineal() {
-        int Xn =this.semilla;
+        int Xn;
         semillas.add(this.semilla);
         //System.out.printf("la primer semilla es: %d\n",Xn);
         for(int i=0; i<cantidadNumerosGenerar; i++){
@@ -44,35 +44,35 @@ public Generador(int modulo, int multiplicador, int semilla) {
             semillas.add(Xn);
         }
     }
-        
+    
+       
     public int GCL(){
         int Xn;
         Xn = (this.semilla * this.multiplicador + this.incremento) % this.modulo;
         this.semilla = Xn;
         return Xn;
-    }
-    
-    public void correrGeneradorMultiplicativo(int modulo, int multiplicador, int semilla) {
+    }     
+
+    public void correrGeneradorMultiplicativo() {
         int Xn;
-        semillas.add(semilla);
+        semillas.add(this.semilla);
         for(int i=0; i<cantidadNumerosGenerar; i++){
-            Xn= GCM(modulo, multiplicador, semilla);
+            Xn= GCM();
             valoresGeneradosNoEstandarizados.add(Xn);
             valoresGeneradosEstandarizados.add(estandarizar(Xn, modulo));
             semillas.add(Xn);
         }
     }
         
-    public int GCM(int modulo, int multiplicador, int semilla){
+    public int GCM(){
         int Xn;
-        Xn = (semilla * multiplicador ) % modulo;
-        semilla = Xn;
+        Xn = (this.semilla * this.multiplicador ) % this.modulo;
+        this.semilla = Xn;
         return Xn;
     }
         
     private double estandarizar(int Xn, int modulo){
         double estandarizado = (double) Xn / modulo;
-        //System.out.printf("el estandarizado es: %f\n",estandarizado);
         return estandarizado;
     }
 
