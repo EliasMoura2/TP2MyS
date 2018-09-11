@@ -15,6 +15,8 @@ public class Generador {
     List <Double> valoresGeneradosEstandarizados = new LinkedList();
     List <Integer> semillas = new LinkedList();
     List <Integer> binarios = new LinkedList();
+//Variables globales para recorrer listas
+    private int indiceEstandarizado =0; //usarlo sobre la lista estandarizada... cada vez que se utilize hay que incrementarlo para que no se repitan los valores... ejemplo: valoresGeneradosEstandarizados.get(indiceEstandarizado) ---->esto retorna una copia del elemento que este en esa posicion de la lista
 //-----------------------------Constructores------------------------------------
 public Generador (){}
     
@@ -157,6 +159,37 @@ public Generador(int modulo, int multiplicador, int semilla) {
         this.binarios = binarios;
     }
 
+    /*
+    METODOS AGREGADOS POR CARLOS
+    */
     
+    public int obtenerEnteroEnRango(int max, int min, double RND){
+        return (int)((max-min+1)*RND+min);
+    }
+    
+    public int obtenerCantidadJugadores(int max, int min){
+        int retorno = this.obtenerEnteroEnRango(max, min, obtenerRND());
+        return retorno;
+    }
+    
+    public double obtenerRND(){//para obtener un numero estandarizado de la lista usemos este metodo...
+        double retorno=this.valoresGeneradosEstandarizados.get(this.indiceEstandarizado);
+        this.indiceEstandarizado++;
+        return retorno;
+    }
+    
+    public double obtenerRNDDinero(){//para obtener un numero estandarizado de la lista usemos este metodo...
+        double aux=1, retorno=1;
+        boolean bandera=false;
+        while(!bandera){
+            aux=this.valoresGeneradosEstandarizados.get(this.indiceEstandarizado);
+            if(aux<=0.4 && aux>0){
+                retorno =aux;
+                bandera=true;
+            }
+            this.indiceEstandarizado++;
+        }
+        return retorno;
+    }
     
 }
