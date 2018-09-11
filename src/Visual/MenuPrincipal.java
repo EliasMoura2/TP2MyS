@@ -22,7 +22,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         txtModulo.setEnabled(false);
         miVisual = visual;
         btnGenerador.setEnabled(false);
-        btnRuleta.setEnabled(false);  
     }
 
 
@@ -39,7 +38,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btnSalir = new javax.swing.JButton();
         txtModulo = new javax.swing.JTextField();
         btnGenerador = new javax.swing.JButton();
-        btnRuleta = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         cmbIncrementos = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
@@ -131,8 +129,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
-        btnRuleta.setText("Ruleta");
-
         jLabel7.setText("Valores recomendados:");
 
         cmbIncrementos.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -175,7 +171,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnGenerador, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
-                    .addComponent(btnRuleta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -189,24 +184,19 @@ public class MenuPrincipal extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(txtModulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnGenerador))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cmbIncrementos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(cmbMultiplicadores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(cmbSemillas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnSalir)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addComponent(btnRuleta)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmbIncrementos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(cmbMultiplicadores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(cmbSemillas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSalir))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
@@ -238,7 +228,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     int periodo;
     int c;//incremento
      //int Xo; //semilla
-    int k = 4; //exponente, M=2^k >=4
+    int k = 0; //exponente, M=2^k >=4
     int m = 0; // modulo
     int multiplicador = 1;
     int numero;
@@ -313,7 +303,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
     cmbSemillas.setModel(miModeloComboSemilla); // setea el jComboBox con los valores del modelo
 
     btnGenerador.setEnabled(true);
-    btnRuleta.setEnabled(true);  
     }
     }//GEN-LAST:event_btnGenerarActionPerformed
 
@@ -337,6 +326,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         Generadores nuevoGenerador = new Generadores(miVisual, Integer.parseInt(txtPeriodo.getText()),Integer.parseInt(txtModulo.getText()), (int) cmbIncrementos.getSelectedItem(), (int) cmbMultiplicadores.getSelectedItem(), (int) cmbSemillas.getSelectedItem());
         nuevoGenerador.setLocation(250, 10);
         nuevoGenerador.show();
+        this.dispose();
     }//GEN-LAST:event_btnGeneradorActionPerformed
 
     private void btnGeneradorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGeneradorMouseClicked
@@ -366,7 +356,6 @@ public boolean controlarCamposGenerador(){
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGenerador;
     private javax.swing.JButton btnGenerar;
-    private javax.swing.JButton btnRuleta;
     private javax.swing.JButton btnSalir;
     private javax.swing.JComboBox<String> cmbIncrementos;
     private javax.swing.JComboBox<String> cmbMultiplicadores;
