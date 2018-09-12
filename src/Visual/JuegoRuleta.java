@@ -2,6 +2,7 @@ package Visual;
 
 import java.util.LinkedList;
 import java.util.List;
+import javax.swing.table.DefaultTableModel;
 import logica.Generador;
 import logica.Jugador;
 
@@ -19,12 +20,31 @@ public class JuegoRuleta extends javax.swing.JFrame {
     private int dineroRepartir=0;
     Generador unGenerador;
     LinkedList<Jugador> jugadores = new LinkedList();
+    LinkedList<Integer> numerosRuleta= new LinkedList();
+    //TAblas
+    DefaultTableModel tablaRuleta;
+    DefaultTableModel tablaJugadores;
+    String cabeceraTblJugadores[] = {"N° Ronda", "Numero J" , "Dinero Disp.", "N° Apuesta R.", "Monto Ap. R."};
+    String[][] datosTblJugadores = {};
+    
+    String cabeceraTblRuleta[] = {"N° Ronda", "Bolillero", "Capital Casino"};
+    String[][] datosTblRuleta = {};
+    //Fin tablas
     
     public JuegoRuleta(ControladoraVisual visual, Generador unGenerador) {
         initComponents();
         miVisual = visual;
         this.unGenerador = unGenerador;
         this.setTitle("Ruleta");
+        //Inicializar tablas
+        tablaJugadores = new DefaultTableModel(datosTblJugadores, cabeceraTblJugadores);
+        tblJugadores.setModel(tablaJugadores);
+        
+        tablaRuleta = new DefaultTableModel(datosTblRuleta, cabeceraTblRuleta);
+        tblRuleta.setModel(tablaRuleta);
+        //FinInicializarTablas
+        
+        this.lblCapitalCasino.setText(String.valueOf(this.capitalInicialCasino));
     }
 
     /**
@@ -43,8 +63,19 @@ public class JuegoRuleta extends javax.swing.JFrame {
         btnRepartir = new javax.swing.JButton();
         txtCantidadMinJugadores = new javax.swing.JTextField();
         txtCantidadMaxJugadores = new javax.swing.JTextField();
+        btnIniciarJuego = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblJugadores = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblRuleta = new javax.swing.JTable();
+        txtMargen = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        lblCapitalCasino = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        txtPorcentajeApuestaMaxJugador = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -72,6 +103,13 @@ public class JuegoRuleta extends javax.swing.JFrame {
             }
         });
 
+        btnIniciarJuego.setText("Iniciar");
+        btnIniciarJuego.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIniciarJuegoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -89,7 +127,9 @@ public class JuegoRuleta extends javax.swing.JFrame {
                 .addComponent(txtDinero, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42)
                 .addComponent(btnRepartir)
-                .addContainerGap(244, Short.MAX_VALUE))
+                .addGap(38, 38, 38)
+                .addComponent(btnIniciarJuego)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -101,23 +141,105 @@ public class JuegoRuleta extends javax.swing.JFrame {
                     .addComponent(txtDinero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnRepartir)
                     .addComponent(txtCantidadMinJugadores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCantidadMaxJugadores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCantidadMaxJugadores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnIniciarJuego))
                 .addContainerGap())
         );
+
+        tblJugadores.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "N° Ronda", "Numero J.", "Dinero Disp.", "N° Apuesta R.", "Monto Ap.R."
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                true, false, true, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tblJugadores);
+
+        tblRuleta.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "N° Ronda", "Bolillero"
+            }
+        ));
+        jScrollPane2.setViewportView(tblRuleta);
+
+        jLabel4.setText("Margen ganancia casino (%): ");
+
+        jLabel5.setText("Capital casino: ");
+
+        lblCapitalCasino.setText("jLabel6");
+
+        jLabel6.setText("Porcentaje Apuesta Max Jugador:");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jLabel3)
-                .addGap(0, 803, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel6))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtMargen, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
+                            .addComponent(txtPorcentajeApuestaMaxJugador))))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(48, 48, 48)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(130, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel5)
+                .addGap(18, 18, 18)
+                .addComponent(lblCapitalCasino)
+                .addGap(452, 452, 452))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jLabel3)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtMargen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3)
+                        .addGap(11, 11, 11)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(txtPorcentajeApuestaMaxJugador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(48, 48, 48)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(lblCapitalCasino))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -132,8 +254,8 @@ public class JuegoRuleta extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(120, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -149,7 +271,9 @@ public class JuegoRuleta extends javax.swing.JFrame {
         
         this.crearJugadores(cantidadJugadores);
         this.repartirDinero();
-        this.mostrar();
+        this.generarSecuenciasJugadores();
+        this.generarNumerosRuleta();
+        this.mostrar(); //para ir probando los valores que se generan
         
     }//GEN-LAST:event_btnRepartirActionPerformed
 
@@ -157,21 +281,103 @@ public class JuegoRuleta extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCantidadMaxJugadoresActionPerformed
 
+    private void btnIniciarJuegoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarJuegoActionPerformed
+        boolean bandera = false;
+        int indice=0;
+        int gananciaMaximaCasino = this.capitalInicialCasino + (int)(this.capitalInicialCasino * (Double.parseDouble(this.txtMargen.getText())/100));
+        System.out.println("GANANCIA MAXIMA "+ gananciaMaximaCasino);
+        int numeroRuleta, numeroApuestaJugador, montoApostado, montoGanado;
+        
+        while(!bandera){
+            int indiceRuleta = (int)((this.numerosRuleta.size()-1-0+1)*Math.random()+0);//si no uso este indice hay problemas..
+            numeroRuleta = this.numerosRuleta.get(indiceRuleta);
+            System.out.println("CAPITAL INICIAL CASINO "+ this.capitalInicialCasino);
+            this.cargarTablaRuleta(indice, numeroRuleta);
+            
+            for(Jugador aux : this.jugadores){
+                
+                numeroApuestaJugador = aux.getNumerosApostados().get(indice);
+                aux.setNumeroApuesta(numeroApuestaJugador);
+                montoApostado=aux.elegirMontoApuesta(Double.parseDouble(this.txtPorcentajeApuestaMaxJugador.getText())/100);
+                this.cargarTablaJugadores(indice, aux);
+                //
+                if(numeroRuleta == numeroApuestaJugador){
+                    System.out.println("------------------------------------------son iguales-----------------------------------");
+                    System.out.println("ronda: " + indice + "numero ruleta: " + numeroRuleta);
+                    if(numeroApuestaJugador>=0 && numeroApuestaJugador <=36){
+                        montoGanado = (int)aux.getApuestaDinero()*34;//la apuesta es 35:1 pero como todavia no se le desconto la apuesta solo entregamos 34 veces lo apostado
+                        //this.capitalInicialCasino =this.capitalInicialCasino - montoGanado;
+                        aux.setDinero(aux.getDinero()+montoGanado);
+                        this.disminuirCapitalInicial(montoGanado);
+                        System.out.println("entre 0-36");
+                    }
+                    if(numeroApuestaJugador==37 || numeroApuestaJugador ==38 || numeroApuestaJugador==39 || numeroApuestaJugador ==40){
+                        montoGanado = (int)aux.getApuestaDinero();
+                        aux.setDinero(aux.getDinero()+montoGanado);
+                          this.disminuirCapitalInicial(montoGanado);
+                        //this.capitalInicialCasino =this.capitalInicialCasino - montoGanado;
+                        System.out.println("entre 37-40");
+                    }
+                }else{
+                    aux.setDinero(aux.getDinero()-aux.getApuestaDinero());
+                    this.aumentarCapitalInicial((int)aux.getApuestaDinero());
+                    //this.capitalInicialCasino =this.capitalInicialCasino + (int)aux.getApuestaDinero();
+                }
+                //
+                aux.setIndice(0);
+            }
+            indice++;
+            
+            if(indice >= this.numerosRuleta.size() || gananciaMaximaCasino<=this.capitalInicialCasino || this.capitalInicialCasino<=0){
+                if(this.capitalInicialCasino<=0){
+                    System.out.println("EL CASINO ESTA EN QUIEBRA");
+                }
+                if(this.capitalInicialCasino<=0){
+                    System.out.println("LA RULETA CUMPLIO SU PERIODO");
+                }
+                if(gananciaMaximaCasino<=this.capitalInicialCasino){
+                    System.out.println("EL CASINO CUMPLIO EL OBJETIVO DE AUMENTAR SU CAPITAL");
+                }
+                System.out.println("entra al if " +capitalInicialCasino+ " - "+gananciaMaximaCasino);
+                bandera=true;
+                indice =0;
+            }
+        }
+        this.lblCapitalCasino.setText(String.valueOf(this.capitalInicialCasino));
+    }//GEN-LAST:event_btnIniciarJuegoActionPerformed
+
     /**
      * @param args the command line arguments
      */
 
+    private void disminuirCapitalInicial(int monto){
+        capitalInicialCasino -=monto; 
+    }
+    private void aumentarCapitalInicial(int monto){
+        capitalInicialCasino +=monto; 
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnIniciarJuego;
     private javax.swing.JButton btnRepartir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lblCapitalCasino;
+    private javax.swing.JTable tblJugadores;
+    private javax.swing.JTable tblRuleta;
     private javax.swing.JTextField txtCantidadMaxJugadores;
     private javax.swing.JTextField txtCantidadMinJugadores;
     private javax.swing.JTextField txtDinero;
+    private javax.swing.JTextField txtMargen;
+    private javax.swing.JTextField txtPorcentajeApuestaMaxJugador;
     // End of variables declaration//GEN-END:variables
 
     private Jugador crearJugador(){
@@ -189,24 +395,93 @@ public class JuegoRuleta extends javax.swing.JFrame {
     
     private void repartirDinero(){
         int cantidadJugadores = this.jugadores.size();
-        for(Jugador aux : this.jugadores){
-            if(aux.getNumero()==cantidadJugadores){
-                aux.setDinero(dineroRepartir);
-                this.dineroRepartir=0;
-            }else{
-                //int valorMaximo=dineroRepartir-this.jugadores.size()-1+contador;
-                int monto = this.unGenerador.obtenerEnteroEnRango(this.dineroRepartir, 0, this.unGenerador.obtenerRNDDinero());
-                aux.setDinero(monto);
-                this.dineroRepartir=this.dineroRepartir-monto;
+        if(this.dineroRepartir<=this.capitalInicialCasino){
+            for(Jugador aux : this.jugadores){
+                if(aux.getNumero()==cantidadJugadores){
+                    aux.setDinero(dineroRepartir);
+                    this.dineroRepartir=0;
+                }else{
+                    //int valorMaximo=dineroRepartir-this.jugadores.size()-1+contador;
+                    int monto = this.unGenerador.obtenerEnteroEnRango(this.dineroRepartir, 0, this.unGenerador.obtenerRNDDinero());
+                    aux.setDinero(monto);
+                    this.dineroRepartir=this.dineroRepartir-monto;
+                }
             }
         }
     }
     
-    private void mostrar(){
+    private void mostrar(){//PARA HACER PRUEBAS
         for(Jugador aux : jugadores){
             System.out.println("numero Jugador " + aux.getNumero());
             System.out.println("dinero disponible "+ aux.getDinero());
         }
+        for(int aux :this.numerosRuleta){
+            System.out.println("numero ruleta: "+aux);
+        }
     }
 
+    private void generarSecuenciasJugadores(){
+        int modulo = (int)this.unGenerador.getModulo(), incremento = (int)this.unGenerador.getIncremento(), multiplicador = (int)this.unGenerador.getMultiplicador();
+        for(Jugador aux : this.jugadores){
+            double RND = this.unGenerador.obtenerRND();
+            aux.generarSecuenciaApuestasNoEstandar(modulo, multiplicador, incremento, RND);
+            aux.generarSecuenciaApuestasEstandar(modulo);
+            aux.generarNumerosApostados();
+            aux.imprimirSecuencias();
+        }
+    }
+    
+    private void generarNumerosRuleta(){//genera y carga la lista de los numero que saldran en la ruleta [0-36 || 37-38=rojo-negro || 39-40=par-impar]
+        this.unGenerador.cargarSecuenciaNumerosParaRuleta();
+        for(double aux:this.unGenerador.getSecuenciaParaNumerosRuletaEstandar()){
+            this.numerosRuleta.add(this.unGenerador.obtenerEnteroEnRango(40, 0, aux));
+        }
+    }
+    
+    
+    public String evaluarApuesta(int numero){
+        String retorno = "Nada que apostar?";
+        if(numero >=0 && numero<=36){
+            retorno = String.valueOf(numero);
+        }
+        if(numero==37){
+            retorno="Rojo";
+        }
+        if(numero==38){
+            retorno="Negro";
+        }
+        if(numero==39){
+            retorno ="Par";
+         }
+        if(numero==40){
+            retorno="Impar";
+         }
+        return retorno;
+    }
+    
+    
+    
+    
+    
+    
+    /*
+    TABLAS
+    */
+    public void cargarTablaJugadores(int numeroRonda, Jugador unJugador){
+        
+            Object datosRow[] = {numeroRonda, unJugador.getNumero(), unJugador.getDinero(), this.evaluarApuesta(unJugador.getNumeroApuesta()), unJugador.getApuestaDinero()};
+            this.tablaJugadores.addRow(datosRow);
+        
+    }
+    
+    public void cargarTablaRuleta(int numeroRonda, int bolillero){
+        
+            Object datosRow[] = {numeroRonda, this.evaluarApuesta(bolillero), this.capitalInicialCasino};
+            this.tablaRuleta.addRow(datosRow);
+        
+    }
+    /*
+    FIN TABLAS
+    */
+    
 }

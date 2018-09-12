@@ -15,6 +15,9 @@ public class Generador {
     List <Double> valoresGeneradosEstandarizados = new LinkedList();
     List <Integer> semillas = new LinkedList();
     List <Integer> binarios = new LinkedList();
+//    ---------------------------------------------------
+    List<Integer> secuenciaParaNumerosRuleta = new LinkedList();
+    List<Double> secuenciaParaNumerosRuletaEstandar = new LinkedList();
 //Variables globales para recorrer listas
     private int indiceEstandarizado =0; //usarlo sobre la lista estandarizada... cada vez que se utilize hay que incrementarlo para que no se repitan los valores... ejemplo: valoresGeneradosEstandarizados.get(indiceEstandarizado) ---->esto retorna una copia del elemento que este en esa posicion de la lista
 //-----------------------------Constructores------------------------------------
@@ -151,6 +154,24 @@ public Generador(int modulo, int multiplicador, int semilla) {
         this.semillas = semillas;
     }
 
+    public List<Integer> getSecuenciaParaNumerosRuleta() {
+        return secuenciaParaNumerosRuleta;
+    }
+
+    public void setSecuenciaParaNumerosRuleta(List<Integer> secuenciaParaNumerosRuleta) {
+        this.secuenciaParaNumerosRuleta = secuenciaParaNumerosRuleta;
+    }
+
+    public List<Double> getSecuenciaParaNumerosRuletaEstandar() {
+        return secuenciaParaNumerosRuletaEstandar;
+    }
+
+    public void setSecuenciaParaNumerosRuletaEstandar(List<Double> secuenciaParaNumerosRuletaEstandar) {
+        this.secuenciaParaNumerosRuletaEstandar = secuenciaParaNumerosRuletaEstandar;
+    }
+    
+    
+
     public List<Integer> getBinarios() {
         return binarios;
     }
@@ -192,4 +213,15 @@ public Generador(int modulo, int multiplicador, int semilla) {
         return retorno;
     }
     
+    public void cargarSecuenciaNumerosParaRuleta(){
+//        int modulo, incremento, multiplicador;
+//        modulo = this
+        int semilla = this.obtenerEnteroEnRango(modulo-1, 0, this.obtenerRND());
+        for(int i = 0;i<this.modulo;i++){
+            this.secuenciaParaNumerosRuleta.add(semilla=((multiplicador*semilla+incremento)%modulo));
+        }
+        for(int aux : this.secuenciaParaNumerosRuleta){
+            this.secuenciaParaNumerosRuletaEstandar.add(this.estandarizar(aux, modulo));
+        }
+    }
 }
