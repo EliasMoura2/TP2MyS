@@ -324,7 +324,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void btnGeneradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGeneradorActionPerformed
         Generadores nuevoGenerador = new Generadores(miVisual, Integer.parseInt(txtPeriodo.getText()),Integer.parseInt(txtModulo.getText()), (int) cmbIncrementos.getSelectedItem(), (int) cmbMultiplicadores.getSelectedItem(), (int) cmbSemillas.getSelectedItem());
-        nuevoGenerador.setLocation(250, 10);
+        //nuevoGenerador.setLocation(250, 10);
+        nuevoGenerador.setLocationRelativeTo(null);
         nuevoGenerador.show();
         this.dispose();
     }//GEN-LAST:event_btnGeneradorActionPerformed

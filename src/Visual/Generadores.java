@@ -400,7 +400,7 @@ public class Generadores extends javax.swing.JFrame {
 
     private void btnJugarRuletaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJugarRuletaActionPerformed
         JuegoRuleta nuevoJuego = new JuegoRuleta(miVisual, miGenerador);
-        nuevoJuego.setLocation(250, 10);
+        nuevoJuego.setLocationRelativeTo(null);
         nuevoJuego.show();
         this.dispose();
     }//GEN-LAST:event_btnJugarRuletaActionPerformed

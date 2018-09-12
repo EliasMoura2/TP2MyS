@@ -2,14 +2,11 @@ package Visual;
 
 import java.util.LinkedList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import logica.Generador;
 import logica.Jugador;
 
-/**
- *
- * @author elias
- */
 public class JuegoRuleta extends javax.swing.JFrame {
 
     /**
@@ -64,18 +61,21 @@ public class JuegoRuleta extends javax.swing.JFrame {
         txtCantidadMinJugadores = new javax.swing.JTextField();
         txtCantidadMaxJugadores = new javax.swing.JTextField();
         btnIniciarJuego = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        txtMargen = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        txtPorcentajeApuestaMaxJugador = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblJugadores = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblRuleta = new javax.swing.JTable();
-        txtMargen = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         lblCapitalCasino = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        txtPorcentajeApuestaMaxJugador = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        btnSalir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -87,6 +87,12 @@ public class JuegoRuleta extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 153, 0));
         jLabel2.setText("Dinero a repartir:");
 
+        txtDinero.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDineroKeyTyped(evt);
+            }
+        });
+
         btnRepartir.setText("Repartir");
         btnRepartir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -95,11 +101,21 @@ public class JuegoRuleta extends javax.swing.JFrame {
         });
 
         txtCantidadMinJugadores.setToolTipText("Mínimo");
+        txtCantidadMinJugadores.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCantidadMinJugadoresKeyTyped(evt);
+            }
+        });
 
         txtCantidadMaxJugadores.setToolTipText("Máximo");
         txtCantidadMaxJugadores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCantidadMaxJugadoresActionPerformed(evt);
+            }
+        });
+        txtCantidadMaxJugadores.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCantidadMaxJugadoresKeyTyped(evt);
             }
         });
 
@@ -110,25 +126,63 @@ public class JuegoRuleta extends javax.swing.JFrame {
             }
         });
 
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("-");
+
+        jLabel4.setForeground(new java.awt.Color(255, 153, 0));
+        jLabel4.setText("Margen ganancia casino (%): ");
+
+        txtMargen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtMargenActionPerformed(evt);
+            }
+        });
+        txtMargen.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtMargenKeyTyped(evt);
+            }
+        });
+
+        jLabel6.setForeground(new java.awt.Color(255, 153, 0));
+        jLabel6.setText("Porcentaje Apuesta Max Jugador:");
+
+        txtPorcentajeApuestaMaxJugador.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPorcentajeApuestaMaxJugadorKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtCantidadMinJugadores, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtCantidadMaxJugadores, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(4, 4, 4)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtDinero, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
-                .addComponent(btnRepartir)
-                .addGap(38, 38, 38)
-                .addComponent(btnIniciarJuego)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtCantidadMinJugadores, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)
+                        .addComponent(txtCantidadMaxJugadores, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtDinero, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtMargen, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtPorcentajeApuestaMaxJugador, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(68, 68, 68)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnIniciarJuego)
+                    .addComponent(btnRepartir))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -137,12 +191,20 @@ public class JuegoRuleta extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(txtDinero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRepartir)
                     .addComponent(txtCantidadMinJugadores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCantidadMaxJugadores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnIniciarJuego))
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel2)
+                    .addComponent(txtDinero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnRepartir))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnIniciarJuego)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel4)
+                        .addComponent(txtMargen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel6)
+                        .addComponent(txtPorcentajeApuestaMaxJugador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -151,95 +213,129 @@ public class JuegoRuleta extends javax.swing.JFrame {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
                 {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
                 {null, null, null, null, null}
             },
             new String [] {
                 "N° Ronda", "Numero J.", "Dinero Disp.", "N° Apuesta R.", "Monto Ap.R."
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                true, false, true, true, true
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        ));
         jScrollPane1.setViewportView(tblJugadores);
 
         tblRuleta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "N° Ronda", "Bolillero"
+                "N° Ronda", "Bolillero", "Capital casino"
             }
         ));
         jScrollPane2.setViewportView(tblRuleta);
-
-        jLabel4.setText("Margen ganancia casino (%): ");
 
         jLabel5.setText("Capital casino: ");
 
         lblCapitalCasino.setText("jLabel6");
 
-        jLabel6.setText("Porcentaje Apuesta Max Jugador:");
+        jLabel8.setIcon(new javax.swing.ImageIcon("/media/elias/Datos/MesaRuleta.jpg")); // NOI18N
+
+        btnSalir.setText("Salir");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel6))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtMargen, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
-                            .addComponent(txtPorcentajeApuestaMaxJugador))))
+                .addComponent(jLabel3)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(48, 48, 48)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(130, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel5)
-                .addGap(18, 18, 18)
-                .addComponent(lblCapitalCasino)
-                .addGap(452, 452, 452))
+                .addComponent(jLabel8)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(254, 254, 254)
+                        .addComponent(jLabel5)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblCapitalCasino)
+                        .addContainerGap())
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap())
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE))))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addGap(527, 527, 527))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtMargen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel3)
-                        .addGap(11, 11, 11)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(txtPorcentajeApuestaMaxJugador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(48, 48, 48)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(lblCapitalCasino))
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addGap(47, 47, 47)
+                .addComponent(btnSalir)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -247,15 +343,16 @@ public class JuegoRuleta extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 9, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -282,6 +379,7 @@ public class JuegoRuleta extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCantidadMaxJugadoresActionPerformed
 
     private void btnIniciarJuegoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarJuegoActionPerformed
+        if(controlarCamposGenerador()){
         boolean bandera = false;
         int indice=0;
         int gananciaMaximaCasino = this.capitalInicialCasino + (int)(this.capitalInicialCasino * (Double.parseDouble(this.txtMargen.getText())/100));
@@ -344,7 +442,51 @@ public class JuegoRuleta extends javax.swing.JFrame {
             }
         }
         this.lblCapitalCasino.setText(String.valueOf(this.capitalInicialCasino));
+        }
     }//GEN-LAST:event_btnIniciarJuegoActionPerformed
+
+    private void txtMargenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMargenActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtMargenActionPerformed
+
+    private void txtCantidadMinJugadoresKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadMinJugadoresKeyTyped
+    char car = evt.getKeyChar();
+        if((car<'0')||( car>'9')){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtCantidadMinJugadoresKeyTyped
+
+    private void txtCantidadMaxJugadoresKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadMaxJugadoresKeyTyped
+    char car = evt.getKeyChar();
+        if((car<'0')||( car>'9')){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtCantidadMaxJugadoresKeyTyped
+
+    private void txtDineroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDineroKeyTyped
+    char car = evt.getKeyChar();
+        if((car<'0')||( car>'9')){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtDineroKeyTyped
+
+    private void txtMargenKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMargenKeyTyped
+    char car = evt.getKeyChar();
+        if((car<'0')||( car>'9')){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtMargenKeyTyped
+
+    private void txtPorcentajeApuestaMaxJugadorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPorcentajeApuestaMaxJugadorKeyTyped
+    char car = evt.getKeyChar();
+        if((car<'0')||( car>'9')){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtPorcentajeApuestaMaxJugadorKeyTyped
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnSalirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -360,12 +502,15 @@ public class JuegoRuleta extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIniciarJuego;
     private javax.swing.JButton btnRepartir;
+    private javax.swing.JButton btnSalir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
@@ -395,19 +540,19 @@ public class JuegoRuleta extends javax.swing.JFrame {
     
     private void repartirDinero(){
         int cantidadJugadores = this.jugadores.size();
-        if(this.dineroRepartir<=this.capitalInicialCasino){
+        //if(this.dineroRepartir<=this.capitalInicialCasino){
             for(Jugador aux : this.jugadores){
                 if(aux.getNumero()==cantidadJugadores){
                     aux.setDinero(dineroRepartir);
                     this.dineroRepartir=0;
                 }else{
                     //int valorMaximo=dineroRepartir-this.jugadores.size()-1+contador;
-                    int monto = this.unGenerador.obtenerEnteroEnRango(this.dineroRepartir, 0, this.unGenerador.obtenerRNDDinero());
+                    int monto = this.unGenerador.obtenerEnteroEnRango(this.dineroRepartir, 10, this.unGenerador.obtenerRNDDinero());
                     aux.setDinero(monto);
                     this.dineroRepartir=this.dineroRepartir-monto;
                 }
             }
-        }
+        //}
     }
     
     private void mostrar(){//PARA HACER PRUEBAS
@@ -483,5 +628,34 @@ public class JuegoRuleta extends javax.swing.JFrame {
     /*
     FIN TABLAS
     */
+    public boolean controlarCamposGenerador(){
+        boolean flag = true;
+        if ("".equals(txtCantidadMinJugadores.getText())) {
+            flag = false;
+            JOptionPane.showMessageDialog(null, "Ingrese la cantidad minima de jugadores");
+        } else {
+            if ("".equals(txtCantidadMaxJugadores.getText())) {
+                flag = false;
+                JOptionPane.showMessageDialog(null, "Ingrese la cantidad maxima de jugadores");
+            } else {
+                if ("".equals(txtDinero.getText())) {
+                    flag = false;
+                    JOptionPane.showMessageDialog(null, "Ingrese el dinero a repartir");
+                } else {
+                    if ("".equals(txtMargen.getText())) {
+                        flag = false;
+                        JOptionPane.showMessageDialog(null, "Ingrese el margen de ganancia para el casino");
+                    }else {
+                        if ("".equals(txtPorcentajeApuestaMaxJugador.getText())) {
+                        flag = false;
+                        JOptionPane.showMessageDialog(null, "Ingrese el porcentaje de apuestas para un jugador");
+                    }
+                }
+                }
+            }
+        }
+        return flag;
+    }
+    
     
 }
