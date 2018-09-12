@@ -57,7 +57,6 @@ public class JuegoRuleta extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtDinero = new javax.swing.JTextField();
-        btnRepartir = new javax.swing.JButton();
         txtCantidadMinJugadores = new javax.swing.JTextField();
         txtCantidadMaxJugadores = new javax.swing.JTextField();
         btnIniciarJuego = new javax.swing.JButton();
@@ -90,13 +89,6 @@ public class JuegoRuleta extends javax.swing.JFrame {
         txtDinero.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtDineroKeyTyped(evt);
-            }
-        });
-
-        btnRepartir.setText("Repartir");
-        btnRepartir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRepartirActionPerformed(evt);
             }
         });
 
@@ -180,23 +172,20 @@ public class JuegoRuleta extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtPorcentajeApuestaMaxJugador, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(68, 68, 68)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnIniciarJuego)
-                    .addComponent(btnRepartir))
+                .addComponent(btnIniciarJuego)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(18, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtCantidadMinJugadores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCantidadMaxJugadores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7)
                     .addComponent(jLabel2)
-                    .addComponent(txtDinero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRepartir))
+                    .addComponent(txtDinero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnIniciarJuego)
@@ -358,7 +347,13 @@ public class JuegoRuleta extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnRepartirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRepartirActionPerformed
+    private void txtCantidadMaxJugadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCantidadMaxJugadoresActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCantidadMaxJugadoresActionPerformed
+
+    private void btnIniciarJuegoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarJuegoActionPerformed
+        if(controlarCamposGenerador()){
+        //codigo repartir dinero
         int cantidadMaxJugadores, cantidadMinJugadores, cantidadJugadores;
         cantidadMaxJugadores = Integer.parseInt(this.txtCantidadMaxJugadores.getText());
         cantidadMinJugadores = Integer.parseInt(this.txtCantidadMinJugadores.getText());
@@ -372,14 +367,7 @@ public class JuegoRuleta extends javax.swing.JFrame {
         this.generarNumerosRuleta();
         this.mostrar(); //para ir probando los valores que se generan
         
-    }//GEN-LAST:event_btnRepartirActionPerformed
-
-    private void txtCantidadMaxJugadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCantidadMaxJugadoresActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCantidadMaxJugadoresActionPerformed
-
-    private void btnIniciarJuegoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarJuegoActionPerformed
-        if(controlarCamposGenerador()){
+        //codigo iniciar
         boolean bandera = false;
         int indice=0;
         int gananciaMaximaCasino = this.capitalInicialCasino + (int)(this.capitalInicialCasino * (Double.parseDouble(this.txtMargen.getText())/100));
@@ -501,7 +489,6 @@ public class JuegoRuleta extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIniciarJuego;
-    private javax.swing.JButton btnRepartir;
     private javax.swing.JButton btnSalir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
