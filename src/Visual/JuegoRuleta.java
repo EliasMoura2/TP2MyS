@@ -15,6 +15,8 @@ public class JuegoRuleta extends javax.swing.JFrame {
     ControladoraVisual miVisual;
     private int capitalInicialCasino=1000000;//fondo con el que comienza el casino, no es el dinero que se reparte entre los jugadores
     private int dineroRepartir=0;
+    private int [] nrosRojos = {1,2,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,35,36};
+    private int [] nrosNegros = {3,4,6,8,10,11,13,15,17,20,22,24,26,28,29,31,33};
     Generador unGenerador;
     LinkedList<Jugador> jugadores = new LinkedList();
     LinkedList<Integer> numerosRuleta= new LinkedList();
@@ -367,35 +369,70 @@ public class JuegoRuleta extends javax.swing.JFrame {
             this.cargarTablaRuleta(indice, numeroRuleta);
             
             for(Jugador aux : this.jugadores){
-                
-                numeroApuestaJugador = aux.getNumerosApostados().get(indice);
-                aux.setNumeroApuesta(numeroApuestaJugador);
-                montoApostado=aux.elegirMontoApuesta(Double.parseDouble(this.txtPorcentajeApuestaMaxJugador.getText())/100);
-                this.cargarTablaJugadores(indice, aux);
-                //
-                if(numeroRuleta == numeroApuestaJugador){
-                    System.out.println("------------------------------------------son iguales-----------------------------------");
-                    System.out.println("ronda: " + indice + "numero ruleta: " + numeroRuleta);
-                    if(numeroApuestaJugador>=0 && numeroApuestaJugador <=36){
-                        montoGanado = (int)aux.getApuestaDinero()*34;//la apuesta es 35:1 pero como todavia no se le desconto la apuesta solo entregamos 34 veces lo apostado
-                        //this.capitalInicialCasino =this.capitalInicialCasino - montoGanado;
-                        aux.setDinero(aux.getDinero()+montoGanado);
-                        this.disminuirCapitalInicial(montoGanado);
-                        System.out.println("entre 0-36");
+                if(aux.getDinero()>=1){
+                    numeroApuestaJugador = aux.getNumerosApostados().get(indice);
+                    aux.setNumeroApuesta(numeroApuestaJugador);
+                    montoApostado=aux.elegirMontoApuesta(Double.parseDouble(this.txtPorcentajeApuestaMaxJugador.getText())/100);
+                    this.cargarTablaJugadores(indice, aux);
+                    //
+                    if(numeroRuleta == 0){//si sale 0 ya se lleva el casino las apuestas de cada uno
+                        aux.setDinero(aux.getDinero()-aux.getApuestaDinero());
+                        this.aumentarCapitalInicial((int)aux.getApuestaDinero());
+                    }else{
+                        if(numeroApuestaJugador>=1 && numeroApuestaJugador <=36){ //si se aposto del 1 al 36 evalua si coincide nro de apuesta con nro de ruleta
+                            if(numeroRuleta == numeroApuestaJugador){//si coincide gana
+                                System.out.println("------------------------------------------son iguales-----------------------------------");
+                                System.out.println("ronda: " + indice + "numero ruleta: " + numeroRuleta);
+                                montoGanado = (int)aux.getApuestaDinero()*34;//la apuesta es 35:1 pero como todavia no se le desconto la apuesta solo entregamos 34 veces lo apostado
+                                //this.capitalInicialCasino =this.capitalInicialCasino - montoGanado;
+                                aux.setDinero(aux.getDinero()+montoGanado);
+                                this.disminuirCapitalInicial(montoGanado);
+                                System.out.println("entre 1-36");
+                            }else{//si no coincide pierde lo apostado
+                                aux.setDinero(aux.getDinero()-aux.getApuestaDinero());
+                                this.aumentarCapitalInicial((int)aux.getApuestaDinero());
+                            }
+                        }else{  //si no jugo a un nro del 1 al 36
+                            boolean coincide = false; 
+                            if(numeroApuestaJugador==37){//si salio 37 como apuesta es que jugo al rojo
+                                for(int i=0;i<this.nrosRojos.length;i++){
+                                    if(this.nrosRojos[i]== numeroRuleta){
+                                        coincide = true;
+                                        i=19;//para salir del bucle, son 19 nros rojos
+                                    }
+                                }
+                            }
+                            if(numeroApuestaJugador==38){//jugo al negro
+                                for(int i=0;i<this.nrosNegros.length;i++){
+                                    if(this.nrosNegros[i]== numeroRuleta){
+                                        coincide = true;
+                                        i=17;//para salir del bucle, son 19 nros rojos
+                                    }
+                                }
+                            }
+                            if(numeroApuestaJugador==39){
+                                if(numeroRuleta % 2 == 0){//si aposto por nro par
+                                    coincide = true;
+                                }
+                            }
+                            if(numeroApuestaJugador==40){
+                                if(numeroRuleta % 2 != 0){//si aposto por nro impar
+                                    coincide = true;
+                                }
+                            }
+                            if(coincide==true){
+                                montoGanado = (int)aux.getApuestaDinero();
+                                aux.setDinero(aux.getDinero()+montoGanado);
+                                this.disminuirCapitalInicial(montoGanado);
+                                //this.capitalInicialCasino =this.capitalInicialCasino - montoGanado;
+                                System.out.println("entre 37-40");
+                            }else{
+                                aux.setDinero(aux.getDinero()-aux.getApuestaDinero());
+                                this.aumentarCapitalInicial((int)aux.getApuestaDinero());
+                            }  
+                        }
                     }
-                    if(numeroApuestaJugador==37 || numeroApuestaJugador ==38 || numeroApuestaJugador==39 || numeroApuestaJugador ==40){
-                        montoGanado = (int)aux.getApuestaDinero();
-                        aux.setDinero(aux.getDinero()+montoGanado);
-                          this.disminuirCapitalInicial(montoGanado);
-                        //this.capitalInicialCasino =this.capitalInicialCasino - montoGanado;
-                        System.out.println("entre 37-40");
-                    }
-                }else{
-                    aux.setDinero(aux.getDinero()-aux.getApuestaDinero());
-                    this.aumentarCapitalInicial((int)aux.getApuestaDinero());
-                    //this.capitalInicialCasino =this.capitalInicialCasino + (int)aux.getApuestaDinero();
                 }
-                //
                 aux.setIndice(0);
             }
             indice++;
@@ -598,7 +635,7 @@ public class JuegoRuleta extends javax.swing.JFrame {
     
     public void cargarTablaRuleta(int numeroRonda, int bolillero){
         
-            Object datosRow[] = {numeroRonda, this.evaluarApuesta(bolillero), this.capitalInicialCasino};
+            Object datosRow[] = {numeroRonda, bolillero, this.capitalInicialCasino};
             this.tablaRuleta.addRow(datosRow);
         
     }

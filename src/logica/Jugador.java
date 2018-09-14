@@ -151,7 +151,7 @@ public class Jugador {
     
     public int generarNumeroApostado(double RND){//se utiliza para cargar la lista de numeros apostados
         int retorno=1;
-        retorno = (int)((40-0+1)*RND+0);//hasta 40 xq [0-36=numeros ; 37-38=rojo-negro ; 39-40=par-impar]
+        retorno = (int)((40-1+1)*RND+0);//hasta 40 xq [1-36=numeros ; 37-38=rojo-negro ; 39-40=par-impar]
         return retorno;
     }
     
