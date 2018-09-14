@@ -30,7 +30,7 @@ public class Generadores extends javax.swing.JFrame {
     public Generadores(ControladoraVisual visual, int periodo, int modulo, int incremento, int multiplicador, int semilla) {
         initComponents();
         miVisual = visual;
-        this.setTitle("Generador congruencial lineal");
+        this.setTitle("Generadores");
         txtModulo.setText(String.valueOf(modulo));
         txtIncremento.setText(String.valueOf(incremento));
         txtMultiplicador.setText(String.valueOf(multiplicador));
@@ -315,8 +315,8 @@ public class Generadores extends javax.swing.JFrame {
             lblTest.setEnabled(true);
             btnMonobit.setEnabled(true);
             btnPoker.setEnabled(true);
-            btnRachas.setEnabled(true);
-            btnRachasLargas.setEnabled(true);
+            //btnRachas.setEnabled(true);
+            //btnRachasLargas.setEnabled(true);
             btnJugarRuleta.setEnabled(true);
         }        
     }//GEN-LAST:event_btnGCMActionPerformed
@@ -342,8 +342,8 @@ public class Generadores extends javax.swing.JFrame {
             lblTest.setEnabled(true);
             btnMonobit.setEnabled(true);
             btnPoker.setEnabled(true);
-            btnRachas.setEnabled(true);
-            btnRachasLargas.setEnabled(true);
+            //btnRachas.setEnabled(true);
+            //btnRachasLargas.setEnabled(true);
             btnJugarRuleta.setEnabled(true);
         }
     }//GEN-LAST:event_btnGCLActionPerformed
@@ -392,9 +392,10 @@ public class Generadores extends javax.swing.JFrame {
             }
         }
         if(cont>=9275 && cont<=10275){
-            JOptionPane.showMessageDialog(null, "La secuencia paso el test monobit \n"+cont+" [9275-10275]\n");
+            JOptionPane.showMessageDialog(null, "La secuencia paso el test monobit:\n"+cont+" [9275-10275]\n");
         }else{
-            JOptionPane.showMessageDialog(null, "La secuencia no paso el test monobit \n"+cont+" [9275-10275]\n");
+            JOptionPane.showMessageDialog(null, "La secuencia no paso el test monobit:\n"+cont+" [9275-10275]\n");
+            
         }
     }//GEN-LAST:event_btnMonobitActionPerformed
 
@@ -420,7 +421,7 @@ public class Generadores extends javax.swing.JFrame {
             cantidad[decimal]=cantidad[decimal]+1;
             indice=indice+4;
         }
-        DecimalFormat objFormato=new DecimalFormat("0.00");
+        DecimalFormat objFormato=new DecimalFormat("#.##");
         for(int i=0;i<cantidad.length;i++){
             sumatoriaMult= (int)(Math.pow(cantidad[i], 2))+ sumatoriaMult;
         }
@@ -429,9 +430,9 @@ public class Generadores extends javax.swing.JFrame {
         resultado=(algo)* (double)sumatoriaMult-5000;
         
         if(resultado>= 2.16 && resultado<= 46.17){
-                JOptionPane.showMessageDialog(null, "Se pasó el test poker Valor del test:"+resultado+"[2,16-46,17]");
+                JOptionPane.showMessageDialog(null, "La secuencia paso el test de poker:\n"+resultado+" esta entre [2,16-46,17]\n");
         }else{
-                JOptionPane.showMessageDialog(null, "No se pasó el test poker Valor del test:"+resultado+"[2,16-46,17]");
+                JOptionPane.showMessageDialog(null, "La secuencia no paso el test de poker:\n"+resultado+" no esta entre [2,16-46,17]\n");
         }    
     }//GEN-LAST:event_btnPokerActionPerformed
 

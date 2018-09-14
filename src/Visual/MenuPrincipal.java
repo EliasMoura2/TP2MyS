@@ -18,10 +18,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
     
     public MenuPrincipal(ControladoraVisual visual) {
         initComponents();
-        this.setTitle("Pagina principal");
+        this.setTitle("Pantalla principal");
         txtModulo.setEnabled(false);
         miVisual = visual;
-        btnGenerador.setEnabled(false);
+        btnGeneradores.setEnabled(false);
     }
 
 
@@ -37,7 +37,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         btnSalir = new javax.swing.JButton();
         txtModulo = new javax.swing.JTextField();
-        btnGenerador = new javax.swing.JButton();
+        btnGeneradores = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         cmbIncrementos = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
@@ -117,15 +117,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
-        btnGenerador.setText("Generador");
-        btnGenerador.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnGeneradores.setText("Generadores");
+        btnGeneradores.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnGeneradorMouseClicked(evt);
+                btnGeneradoresMouseClicked(evt);
             }
         });
-        btnGenerador.addActionListener(new java.awt.event.ActionListener() {
+        btnGeneradores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGeneradorActionPerformed(evt);
+                btnGeneradoresActionPerformed(evt);
             }
         });
 
@@ -170,7 +170,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                     .addComponent(jLabel7))
                 .addGap(29, 29, 29)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnGenerador, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
+                    .addComponent(btnGeneradores, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
                     .addComponent(btnSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -183,7 +183,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtModulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnGenerador))
+                    .addComponent(btnGeneradores))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmbIncrementos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -302,7 +302,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }
     cmbSemillas.setModel(miModeloComboSemilla); // setea el jComboBox con los valores del modelo
 
-    btnGenerador.setEnabled(true);
+    btnGeneradores.setEnabled(true);
     }
     }//GEN-LAST:event_btnGenerarActionPerformed
 
@@ -322,17 +322,17 @@ public class MenuPrincipal extends javax.swing.JFrame {
         cmbIncrementos.setToolTipText("Primos relativos del modulo");//proporciona un mesaje al pasar el mouse por ensima del objeto
     }//GEN-LAST:event_cmbIncrementosMouseMoved
 
-    private void btnGeneradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGeneradorActionPerformed
+    private void btnGeneradoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGeneradoresActionPerformed
         Generadores nuevoGenerador = new Generadores(miVisual, Integer.parseInt(txtPeriodo.getText()),Integer.parseInt(txtModulo.getText()), (int) cmbIncrementos.getSelectedItem(), (int) cmbMultiplicadores.getSelectedItem(), (int) cmbSemillas.getSelectedItem());
         //nuevoGenerador.setLocation(250, 10);
         nuevoGenerador.setLocationRelativeTo(null);
         nuevoGenerador.show();
         this.dispose();
-    }//GEN-LAST:event_btnGeneradorActionPerformed
+    }//GEN-LAST:event_btnGeneradoresActionPerformed
 
-    private void btnGeneradorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGeneradorMouseClicked
+    private void btnGeneradoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGeneradoresMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnGeneradorMouseClicked
+    }//GEN-LAST:event_btnGeneradoresMouseClicked
 
     private void txtPeriodoMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtPeriodoMouseMoved
         txtPeriodo.setToolTipText("Se recomienda que sea mayor o igual a 20mil para los test F.I.P.S.");//proporciona un mesaje al pasar el mouse por ensima del objeto
@@ -355,7 +355,7 @@ public boolean controlarCamposGenerador(){
     } 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnGenerador;
+    private javax.swing.JButton btnGeneradores;
     private javax.swing.JButton btnGenerar;
     private javax.swing.JButton btnSalir;
     private javax.swing.JComboBox<String> cmbIncrementos;
