@@ -15,7 +15,7 @@ public class Jugador {
     private String colorApuesta;
     private LinkedList<Integer> secuenciaApuestasNoEstandar = new LinkedList();
     private LinkedList<Double> secuenciaApuestasEstandar = new LinkedList();
-    private LinkedList<Integer> numerosApostados = new LinkedList();//numeros de 0-36  ||  37-38 color  ||  39-40 paridad
+    private LinkedList<Integer> numerosApostados = new LinkedList();//numeros de 1-36  ||  37-38 color  ||  39-40 paridad
     private int indice = 0; //indice para recorrer la lista de secuenciaApuestasEstandar 
 
     public Jugador(int numero) {
