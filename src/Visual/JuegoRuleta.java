@@ -52,6 +52,7 @@ public class JuegoRuleta extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -142,6 +143,7 @@ public class JuegoRuleta extends javax.swing.JFrame {
             }
         });
 
+        buttonGroup1.add(rbtOp3);
         rbtOp3.setText("Cantidad de bolillas");
         rbtOp3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -149,6 +151,7 @@ public class JuegoRuleta extends javax.swing.JFrame {
             }
         });
 
+        buttonGroup1.add(rbtOp2);
         rbtOp2.setText("Perdida Jugadores");
         rbtOp2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -156,6 +159,7 @@ public class JuegoRuleta extends javax.swing.JFrame {
             }
         });
 
+        buttonGroup1.add(rbtOp1);
         rbtOp1.setText("Ganancia casino");
         rbtOp1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -619,6 +623,7 @@ public class JuegoRuleta extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIniciarJuego;
     private javax.swing.JButton btnSalir;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
